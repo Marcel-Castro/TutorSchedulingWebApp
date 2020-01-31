@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    width: 15vh;
+}
+
+th {
+    background-color: #3bd96d;
+}
+
+.shiftCell {
+    background-color: #6b3bcc;
+    color: white;
+    text-align: center;
+}
+
+.headerCol {
+}
