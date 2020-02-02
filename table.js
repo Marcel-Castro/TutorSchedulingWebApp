@@ -45,12 +45,12 @@ function sortShifts(tutorShifts) {
             if (tutorShifts[i].startTime === shifts[j].startTime) {
                 var k = j;
 
-                while (getDayNumber(shifts[k].day) === getDayNumber(shifts[j].day)) {
+                while (shifts[k].startTime === shifts[j].startTime) {
                     if (getDayNumber(tutorShifts[i].day) < getDayNumber(shifts[k].day)) {
                         shifts.splice(k, 0, tutorShifts[i]);
                         placed = true;
                         break;
-                    } else if (getDayNumber(shifts[k + 1].day) !== getDayNumber(shifts[j].day)) {
+                    } else if (shifts[k + 1].startTime !== shifts[j].startTime) {
                         shifts.splice(k + 1, 0, tutorShifts[i]);
                         placed = true;
                         break;
@@ -111,25 +111,12 @@ function removeDuplicates (shifts) {
     return shifts;
 }
 
-// Creates a list of all the shifts covered by tutors who cover the specified course
-function condenseTutorShifts (tutors, course) {
-    var shifts = [];
-
-    // Create array containing only the shifts of tutors who cover specified course
-    shifts = getShiftsByCourse(tutors, course);
-
-    console.log("Course Selection: ", shifts.slice());
-
-    // Remove duplicate shifts
-    shifts = removeDuplicates(shifts);
-
-    console.log("Duplicates Removed: ", shifts.slice());
-
-    // Join shifts with overlapping times together
+// Take an array of shifts and join shifts with overlapping times into single elements
+function joinOverlapping (shifts) {
     for (var i = 0; i < shifts.length; i++) {
         for (var j = 0; j < shifts.length; j++) {
-            if (shifts[i] !== undefined) {
-                if (shifts[i].day === shifts[j].day && i !== j) {
+            if (shifts[i] !== undefined && shifts[j] !== undefined) {
+                if (getDayNumber(shifts[i].day) === getDayNumber(shifts[j].day) && i !== j) {
                     var overlap = false;
                     var shiftDay = shifts[i].day;
                     var newStartTime;
@@ -161,15 +148,43 @@ function condenseTutorShifts (tutors, course) {
                             startTime: newStartTime,
                             endTime: newEndTime
                         }
-        
-                        shifts.splice(i, 1);
-                        shifts.splice(j, 1);
+
+                        // Accounting for the fact that splice() may shift element indexes
+                        if (i > j) {
+                            shifts.splice(i, 1);
+                            shifts.splice(j, 1);
+                        } else {
+                            shifts.splice(i, 1);
+                            shifts.splice(j - 1, 1);
+                        }
+
                         shifts.splice(0, 0, newShift);
                     }
                 }
             }
         }
+        // console.log("Step: ", shifts.slice());
     }
+
+    return shifts;
+}
+
+// Creates a list of all the shifts covered by tutors who cover the specified course
+function condenseTutorShifts (tutors, course) {
+    var shifts = [];
+
+    // Create array containing only the shifts of tutors who cover specified course
+    shifts = getShiftsByCourse(tutors, course);
+
+    console.log("Course Selection: ", shifts.slice());
+
+    // Remove duplicate shifts
+    shifts = removeDuplicates(shifts);
+
+    console.log("Duplicates Removed: ", shifts.slice());
+
+    // Join shifts with overlapping times together
+    shifts = joinOverlapping(shifts);
 
     return shifts;
 }
