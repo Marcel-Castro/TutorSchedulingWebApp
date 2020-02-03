@@ -1,24 +1,66 @@
+body, html {
+    font-family: sans-serif;
+    width: 100%;
+    margin: 0;
+    background-color: #081E3f;
+}
+
+h1 {
+    color: #e3ab1e;
+    text-align: center;
+}
+
+select {
+    padding: 4px;
+    font-weight: bold;
+    margin: 20px 20px;
+}
+
 table {
     width: 100%;
     table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 table, th, td {
     border: 1px solid black;
-    border-collapse: collapse;
+    border-color: #d6d6d6;
+}
+
+tr {
+    height: 1px; /* Used for getting div container to fit shift cells */
 }
 
 th, td {
-    padding: 8px;
-    width: 15vh;
+    padding: 14px 16px;
+    height: inherit; /* Used for getting div container to fit shift cells */
 }
 
 th {
-    background-color: #3bd96d;
+    background-color: #e3ab1e;
+    color: #081E3f;
 }
 
-.shiftCell {
-    background-color: #6b3bcc;
+td {
+    background-color: white;
+}
+
+.shiftCell  {
+    padding: 6px;
+}
+
+.shiftDiv {
+    background-color: #081E3f;
+    border-radius: 16px;
+    height: 100%; /* Used for getting div container to fit shift cells */
+    padding-left: 14px;
+    padding-right: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.shiftText {
     color: white;
     text-align: center;
 }

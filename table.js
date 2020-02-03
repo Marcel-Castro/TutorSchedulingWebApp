@@ -1,6 +1,6 @@
 // First and last time slots in the table in military time
 const START_TIME = 8;
-const END_TIME = 18;
+const END_TIME = 21;
 
 // Calculate how many cells a shift should cover on the table
 function calculateRowSpan(shift) {
@@ -201,12 +201,18 @@ function populateTable(shiftList) {
 
             if (currentID === shifts[i].startTime && getDayNumber(shifts[i].day) === j) {
                 // Create and append shift cell with appropriate rowspan
-                var newElement = document.createElement("td");
-                var newContent = document.createTextNode("Shift: " + shifts[i].day + " from " + shifts[i].startTime + " to " + shifts[i].endTime);
-                newElement.appendChild(newContent);
-                newElement.setAttribute("rowspan", String(rowspan))
-                newElement.classList.add("shiftCell");
-                document.getElementById("time_" + String(currentID)).appendChild(newElement);
+                var newCell = document.createElement("td");
+                var newContainer = document.createElement("div");
+                var newSpan = document.createElement("span");
+                var newText = document.createTextNode("Shift: " + shifts[i].day + " from " + shifts[i].startTime + " to " + shifts[i].endTime);
+                newSpan.appendChild(newText);
+                newSpan.classList.add("shiftText");
+                newContainer.appendChild(newSpan);
+                newContainer.classList.add("shiftDiv");
+                newCell.setAttribute("rowspan", String(rowspan));
+                newCell.classList.add("shiftCell");
+                newCell.appendChild(newContainer);
+                document.getElementById("time_" + String(currentID)).appendChild(newCell);
 
                 if (i < shifts.length - 1) {
                     i++;

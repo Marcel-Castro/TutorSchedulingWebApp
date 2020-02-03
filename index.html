@@ -13,6 +13,11 @@
     <title>TableTest</title>
 </head>
 <body>
+    <h1>STARS Tutoring Schedule</h1>
+    <select>
+        <option>Course</option>
+        <option>Tutor</option>
+    </select>
     <table>
         <tr>
             <th></th>
@@ -87,12 +92,30 @@
         <tr id="time_18">
             <th class="headerCol">6:00 PM</th>
         </tr>
+        <tr id="time_18.5">
+            <th class="headerCol">6:30 PM</th>
+        </tr>
+        <tr id="time_19">
+            <th class="headerCol">7:00 PM</th>
+        </tr>
+        <tr id="time_19.5">
+            <th class="headerCol">7:30 PM</th>
+        </tr>
+        <tr id="time_20">
+            <th class="headerCol">8:00 PM</th>
+        </tr>
+        <tr id="time_20.5">
+            <th class="headerCol">8:30 PM</th>
+        </tr>
+        <tr id="time_21">
+            <th class="headerCol">9:00 PM</th>
+        </tr>
     </table>
 
     <script>
         console.log("Condensed: ", condenseTutorShifts(tutors, "COP2"));
         // console.log("Sorted: ", sortShifts(condenseTutorShifts(tutors, "COP2")));
-        populateTable(condenseTutorShifts(tutors, "COP1"));
+        populateTable(condenseTutorShifts(tutors, "COP2"));
     </script>
 </body>
 </html>
