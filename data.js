@@ -6,6 +6,14 @@ const course2 = "COP2";
 
 const course3 = "COP3";
 
+// Course List -------------------------------------------------- //
+
+var courses = [];
+
+courses.push(course1);
+courses.push(course2);
+courses.push(course3);
+
 // Shifts -------------------------------------------------- //
 
 var sampleShift = {

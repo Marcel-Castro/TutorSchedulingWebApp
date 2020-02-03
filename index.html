@@ -7,18 +7,32 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <script src="tutors.js"></script>
+    <script src="data.js"></script>
     <script src="table.js"></script>
+    <script src="main.js"></script>
 
     <title>TableTest</title>
 </head>
 <body>
     <h1>STARS Tutoring Schedule</h1>
     <select>
+        <option selected="selected">Filter by...</option>
         <option>Course</option>
         <option>Tutor</option>
     </select>
+    <select id="tutor">
+        <option selected="selected">Select a Tutor</option>
+    </select>
+    <select id="course">
+        <option selected="selected">Select a Course</option>
+    </select>
     <table>
+        <tr>
+            <th colspan="8">
+                <h2 id=courseHeader>Displaying hours covered for:</h2>
+                <h2 id="tutorHeader">Displaying hours covered by:</h2>
+            </th>
+        </tr>
         <tr>
             <th></th>
             <th>Monday</th>
@@ -110,12 +124,28 @@
         <tr id="time_21">
             <th class="headerCol">9:00 PM</th>
         </tr>
+        <tr id="time_21.5">
+            <th class="headerCol">9:30 PM</th>
+        </tr>
+        <tr id="time_22">
+            <th class="headerCol">10:00 PM</th>
+        </tr>
+        <tr id="time_22.5">
+            <th class="headerCol">10:30 PM</th>
+        </tr>
+        <tr id="time_23">
+            <th class="headerCol">11:00 PM</th>
+        </tr>
+        <tr id="time_23.5">
+            <th class="headerCol">11:30 PM</th>
+        </tr>
+        <tr id="time_24">
+            <th class="headerCol">12:00 PM</th>
+        </tr>
     </table>
 
     <script>
-        console.log("Condensed: ", condenseTutorShifts(tutors, "COP2"));
-        // console.log("Sorted: ", sortShifts(condenseTutorShifts(tutors, "COP2")));
-        populateTable(condenseTutorShifts(tutors, "COP2"));
+        main();
     </script>
 </body>
 </html>

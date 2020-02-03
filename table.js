@@ -1,6 +1,6 @@
 // First and last time slots in the table in military time
 const START_TIME = 8;
-const END_TIME = 21;
+const END_TIME = 24;
 
 // Calculate how many cells a shift should cover on the table
 function calculateRowSpan(shift) {
@@ -190,7 +190,7 @@ function condenseTutorShifts (tutors, course) {
 }
 
 // Allocate one or more shifts into the table and fill the rest of the table with empty cells
-function populateTable(shiftList) {
+function populateTableShifts(shiftList) {
     var currentID;
     var shifts = sortShifts(shiftList);
     var i = 0;
@@ -204,7 +204,7 @@ function populateTable(shiftList) {
                 var newCell = document.createElement("td");
                 var newContainer = document.createElement("div");
                 var newSpan = document.createElement("span");
-                var newText = document.createTextNode("Shift: " + shifts[i].day + " from " + shifts[i].startTime + " to " + shifts[i].endTime);
+                var newText = document.createTextNode(shifts[i].day + " from " + shifts[i].startTime + " to " + shifts[i].endTime);
                 newSpan.appendChild(newText);
                 newSpan.classList.add("shiftText");
                 newContainer.appendChild(newSpan);
@@ -238,12 +238,12 @@ function populateTable(shiftList) {
     }
 }
 
-// function fillTableWithID () {
-//     for (currentID = START_TIME; currentID <= END_TIME; currentID = currentID + .5) {
-//         for (var i = 1; i <= 7; i++) {
-//             var newElement = document.createElement("td");
-//             newElement.setAttribute("id", "cell_" + currentID + "_" + i);
-//             document.getElementById("time_" + String(currentID)).appendChild(newElement);
-//         }
-//     }
-// }
+// Populate table with empty cells (represents default state of table)
+function fillTable() {
+    for (currentID = START_TIME; currentID <= END_TIME; currentID = currentID + .5) {
+        for (var i = 1; i <= 7; i++) {
+            var newElement = document.createElement("td");
+            document.getElementById("time_" + String(currentID)).appendChild(newElement);
+        }
+    }
+}
