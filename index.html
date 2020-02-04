@@ -17,23 +17,21 @@
 <body>
     <h1>STARS Tutoring Schedule</h1>
     <select id="filter">
-        <option selected="selected">Filter by...</option>
-        <option>Course</option>
-        <option>Tutor</option>
+        <option value="" selected="selected">Filter by...</option>
+        <option value="course">Course</option>
+        <option value ="tutor">Tutor</option>
     </select>
-    <select id="tutor">
-        <option selected="selected">Select a Tutor</option>
+    <select id="tutor" class="hide">
+        <option value ="" selected="selected">Select a Tutor</option>
     </select>
-    <select id="course">
-        <option selected="selected">Select a Course</option>
+    <select id="course" class="hide">
+        <option value="" selected="selected">Select a Course</option>
     </select>
+    <div id="header" class="tableHeader hide">
+        <h2 id="courseHeader" class="hide">Displaying Hours Covered For:</h2>
+        <h2 id="tutorHeader" class="hide">Displaying Hours Covered By:</h2>
+    </div>
     <table>
-        <tr>
-            <th colspan="8">
-                <h2 id=courseHeader>Displaying hours covered for:</h2>
-                <h2 id="tutorHeader">Displaying hours covered by:</h2>
-            </th>
-        </tr>
         <tr>
             <th></th>
             <th>Monday</th>

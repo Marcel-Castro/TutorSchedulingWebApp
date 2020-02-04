@@ -247,3 +247,12 @@ function fillTable() {
         }
     }
 }
+
+// Remove all data cells from the table
+function removeDataCells() {
+    var cells = document.getElementsByTagName("TD");
+    const length = cells.length;
+    for (var i = 0; i < length; i++) {
+        cells[0].parentNode.removeChild(cells[0]);
+    }
+}

@@ -23,11 +23,51 @@ function populateCourseSelector (courses) {
 }
 
 function main () {
+    var filter = document.getElementById("filter");
+    var courseSelector = document.getElementById("course");
+    var tutorSelector = document.getElementById("tutor");
+
+    var header = document.getElementById("header");
+    var courseHead = document.getElementById("courseHeader");
+    var tutorHead = document.getElementById("courseHeader");
+
+    // Fill selectors with appropriate options from data
     populateTutorSelector(tutors);
     populateCourseSelector(courses);
-    // fillTable();
-    var filter = document.getElementById("filter");
+
+    // Table should be populated with empty cells by default
+    fillTable();
+
+    filter.addEventListener("change", (event) => {
+        if (event.target.value === "") {
+            removeDataCells();
+            fillTable();
+            courseSelector.classList.add("hide");
+            tutorSelector.classList.add("hide");
+        } else if (event.target.value === "course") {
+            courseSelector.classList.remove("hide");
+            tutorSelector.classList.add("hide");
+        } else if (event.target.value === "tutor") {
+            courseSelector.classList.add("hide");
+            tutorSelector.classList.remove("hide");
+        }
+    })
+
+    courseSelector.addEventListener("change", (event) => {
+        if (event.target.value === "") {
+            removeDataCells();
+            fillTable();
+            header.classList.add("hide");
+        } else {
+            header.classList.remove("hide");
+            // Not finished
+        }
+    })
+
+    tutorSelector.addEventListener("change", (event) => {
+
+    })
 
 
-    populateTableShifts(condenseTutorShifts(tutors, "COP2"));
+    // populateTableShifts(condenseTutorShifts(tutors, "COP2"));
 }

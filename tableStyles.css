@@ -34,6 +34,7 @@ td {
 
 .shiftDiv {
     background-color: #081E3f;
+    background-image: linear-gradient(#0a3066, #081E3f);
     border-radius: 16px;
     height: 100%; /* Used for getting div container to fit shift cells */
     padding-left: 14px;

@@ -16,8 +16,19 @@ body::before {
     z-index: 100;
 }
 
+.tableHeader {
+    width: 100%;
+    background-color: #e3ab1e;
+    padding: 2px 0px;
+}
+
 h1 {
     color: #e3ab1e;
+    text-align: center;
+}
+
+h2 {
+    color: #081E3f;
     text-align: center;
 }
 
