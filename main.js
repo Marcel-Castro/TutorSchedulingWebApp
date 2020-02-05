@@ -58,14 +58,45 @@ function main () {
             removeDataCells();
             fillTable();
             header.classList.add("hide");
+            courseHead.classList.add("hide");
         } else {
             header.classList.remove("hide");
-            // Not finished
+            courseHead.classList.remove("hide");
+
+            if (courseHead.childNodes.length >= 2) {
+                var textChild = courseHead.childNodes[1];
+                courseHead.removeChild(textChild);
+            }
+
+            var newText = document.createTextNode(event.target.value);
+            courseHead.appendChild(newText);
+
+            removeDataCells();
+            populateTableShifts(condenseTutorShifts(tutors, event.target.value));
         }
     })
 
     tutorSelector.addEventListener("change", (event) => {
+        if (event.target.value === "") {
+            removeDataCells();
+            fillTable();
+            header.classList.add("hide");
+            tutorHead.classList.add("hide");
+        } else {
+            header.classList.remove("hide");
+            tutorHead.classList.remove("hide");
 
+            if (tutorHead.childNodes.length >= 2) {
+                var textChild = tutorHead.childNodes[1];
+                tutorHead.removeChild(textChild);
+            }
+
+            var newText = document.createTextNode(event.target.value);
+            tutorHead.appendChild(newText);
+
+            removeDataCells();
+            populateTableShifts(); // Not Finished
+        }
     })
 
 

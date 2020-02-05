@@ -5,6 +5,7 @@ body, html {
     background-color: #081E3f;
 }
 
+/* Adds top shadow to page */
 body::before {
     content: "";
     position: fixed;
@@ -16,10 +17,11 @@ body::before {
     z-index: 100;
 }
 
+/* Not actually part of the table but made to look that way */
 .tableHeader {
     width: 100%;
     background-color: #e3ab1e;
-    padding: 2px 0px;
+    padding: 1px 0px;
 }
 
 h1 {
