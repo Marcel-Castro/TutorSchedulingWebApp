@@ -29,7 +29,7 @@ function main () {
 
     var header = document.getElementById("header");
     var courseHead = document.getElementById("courseHeader");
-    var tutorHead = document.getElementById("courseHeader");
+    var tutorHead = document.getElementById("tutorHeader");
 
     // Fill selectors with appropriate options from data
     populateTutorSelector(tutors);
@@ -44,12 +44,39 @@ function main () {
             fillTable();
             courseSelector.classList.add("hide");
             tutorSelector.classList.add("hide");
+    
+            // Hide header
+            header.classList.add("hide");
+            courseHead.classList.add("hide");
+            tutorHead.classList.add("hide");
+            
+            // Set selectors to back to defaults
+            tutorSelector.value = "";
+            courseSelector.value = "";
         } else if (event.target.value === "course") {
+            removeDataCells();
+            fillTable();
             courseSelector.classList.remove("hide");
             tutorSelector.classList.add("hide");
+            
+            // Hide Header (switching filtering criteria should trigger this, subject to change)
+            header.classList.add("hide");
+            tutorHead.classList.add("hide");
+    
+            // Set only tutor selector back to default
+            tutorSelector.value = "";
         } else if (event.target.value === "tutor") {
+            removeDataCells();
+            fillTable();
             courseSelector.classList.add("hide");
             tutorSelector.classList.remove("hide");
+    
+            // Hide Header (switching filtering criteria should trigger this, subject to change)
+            header.classList.add("hide");
+            courseHead.classList.add("hide");
+    
+            // Set only course selector back to default
+            courseSelector.value = "";
         }
     })
 
@@ -95,10 +122,7 @@ function main () {
             tutorHead.appendChild(newText);
 
             removeDataCells();
-            populateTableShifts(); // Not Finished
+            populateTableShifts(getTutorShifts(tutors, event.target.value));
         }
     })
-
-
-    // populateTableShifts(condenseTutorShifts(tutors, "COP2"));
 }

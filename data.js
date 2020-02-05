@@ -1,3 +1,7 @@
+/*
+    All arrays in data file are globally available, this is subject to change (especially after database implementation)
+*/
+
 // Courses -------------------------------------------------- //
 
 const course1 = "COP1";
@@ -18,8 +22,8 @@ courses.push(course3);
 
 var sampleShift = {
     day: "Wednesday",
-    startTime: 13.5,
-    endTime: 16
+    startTime: 14.5,
+    endTime: 21
 }
 
 var sampleShift2 = {

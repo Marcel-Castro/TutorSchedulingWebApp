@@ -256,3 +256,10 @@ function removeDataCells() {
         cells[0].parentNode.removeChild(cells[0]);
     }
 }
+
+// Get the shift list from a single tutor
+function getTutorShifts(tutorList, tutorName) {
+    var tutor = tutorList.filter(tutor => (tutor.name === tutorName));
+
+    return tutor[0].shifts;
+}
