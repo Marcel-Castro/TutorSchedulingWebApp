@@ -49,5 +49,21 @@ td {
 }
 
 .headerCol {
-    width: 7%;
+    width: 9%;
+    text-align: right;
+    border-right: #e3ab1e;
+    border-bottom: #e3ab1e;
+    border-top: #e3ab1e;
+}
+
+.headerColText {
+    
+}
+
+.cornerCell {
+    border-bottom: #e3ab1e;
+}
+
+.colOneFinal {
+    color: #e3ab1e;
 }

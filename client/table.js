@@ -1,6 +1,6 @@
 // First and last time slots in the table in military time
 const START_TIME = 8;
-const END_TIME = 24;
+const END_TIME = 24.5;
 
 // Calculate how many cells a shift should cover on the table
 function calculateRowSpan(shift) {
@@ -257,4 +257,63 @@ function getTutorShifts(tutorList, tutorName) {
     var tutor = tutorList.filter(tutor => (tutor.name === tutorName));
 
     return tutor[0].shifts;
+}
+
+// Generate left side headers for the table
+function addHeaders() {
+    var table = document.getElementById("table");
+
+    for (currentID = START_TIME; currentID <= END_TIME; currentID = currentID + .5) {
+        var newRow = document.createElement("tr");
+        var newHead = document.createElement("th");
+        var newSpan = document.createElement("span");
+
+        // Generate text for row headers
+        var rowText;
+        var idString = currentID.toString();
+        var decimal = idString.indexOf(".");
+
+        console.log(idString + ", " + decimal);
+
+        if (currentID < 12) {
+            if (decimal !== -1) {
+                rowText = idString.substr(0, decimal) + ":30 AM";
+            } else {
+                rowText = idString + ":00 AM";
+            }
+        } else if (currentID >= 12 && currentID < 24) {
+            if (currentID >= 13) {
+                idString = String (currentID - 12);
+                decimal = idString.indexOf(".");
+            }
+
+            if (decimal !== -1) {
+                rowText = idString.substr(0, decimal) + ":30 PM";
+            } else {
+                rowText = idString + ":00 PM";
+            }
+        } else if (currentID === 24) {
+            rowText = "12:00 AM";
+        } else {
+            // Filler row for padding, contains arbitray filler text
+            rowText = "Fill";
+        }
+
+        var newText = document.createTextNode(rowText);
+
+        newRow.setAttribute("id", "time_" + currentID);
+        newHead.classList.add("headerCol");
+        newSpan.classList.add("headerColText");
+
+        if (currentID !== END_TIME) {
+            newSpan.classList.add("headerColText");
+        } else {
+            newSpan.classList.add("colOneFinal");
+        }
+
+        newSpan.appendChild(newText);
+        newHead.appendChild(newSpan);
+        newRow.appendChild(newHead);
+        table.appendChild(newRow);
+    }
 }

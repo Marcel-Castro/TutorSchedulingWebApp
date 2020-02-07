@@ -37,6 +37,8 @@ function main () {
     populateTutorSelector(tutors);
     populateCourseSelector(courses);
 
+    addHeaders();
+
     // Table should be populated with empty cells by default
     fillTable();
 
