@@ -163,7 +163,6 @@ function joinOverlapping (shifts) {
                 }
             }
         }
-        // console.log("Step: ", shifts.slice());
     }
 
     return shifts;
@@ -176,12 +175,8 @@ function condenseTutorShifts (tutors, course) {
     // Create array containing only the shifts of tutors who cover specified course
     shifts = getShiftsByCourse(tutors, course);
 
-    console.log("Course Selection: ", shifts.slice());
-
     // Remove duplicate shifts
     shifts = removeDuplicates(shifts);
-
-    console.log("Duplicates Removed: ", shifts.slice());
 
     // Join shifts with overlapping times together
     shifts = joinOverlapping(shifts);
@@ -257,7 +252,7 @@ function removeDataCells() {
     }
 }
 
-// Get the shift list from a single tutor
+// Get the shift list from a single tutor (assumes all tutors have a unique name)
 function getTutorShifts(tutorList, tutorName) {
     var tutor = tutorList.filter(tutor => (tutor.name === tutorName));
 

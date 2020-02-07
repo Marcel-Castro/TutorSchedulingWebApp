@@ -28,7 +28,7 @@ function main () {
     var courseSelector = document.getElementById("course");
     var tutorSelector = document.getElementById("tutor");
 
-    // Related to headers
+    // Related to header
     var header = document.getElementById("header");
     var courseHead = document.getElementById("courseHeader");
     var tutorHead = document.getElementById("tutorHeader");
