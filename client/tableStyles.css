@@ -1,6 +1,6 @@
 table {
-    width: 100%;
     table-layout: fixed;
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -49,5 +49,8 @@ td {
 }
 
 .headerCol {
-    width: 15px;
+    /* position: relative;
+    bottom: 24px; */
+    text-align: right;
+    width: 100px;
 }
