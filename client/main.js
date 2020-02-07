@@ -23,10 +23,12 @@ function populateCourseSelector (courses) {
 }
 
 function main () {
+    // Related to selectors
     var filter = document.getElementById("filter");
     var courseSelector = document.getElementById("course");
     var tutorSelector = document.getElementById("tutor");
 
+    // Related to headers
     var header = document.getElementById("header");
     var courseHead = document.getElementById("courseHeader");
     var tutorHead = document.getElementById("tutorHeader");
