@@ -1,6 +1,5 @@
 table {
     width: 100%;
-    table-layout: fixed;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -26,6 +25,7 @@ th {
 
 td {
     background-color: white;
+    width: 12%;
 }
 
 .shiftCell  {
@@ -49,5 +49,5 @@ td {
 }
 
 .headerCol {
-    width: 15px;
+    width: 7%;
 }
