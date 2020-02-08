@@ -204,6 +204,7 @@ function populateTableShifts(shiftList) {
                 newSpan.classList.add("shiftText");
                 newContainer.appendChild(newSpan);
                 newContainer.classList.add("shiftDiv");
+                newContainer.setAttribute("id", "shift") // Used to reference shifts later for tooltips
                 newCell.setAttribute("rowspan", String(rowspan));
                 newCell.classList.add("shiftCell");
                 newCell.appendChild(newContainer);
@@ -222,8 +223,6 @@ function populateTableShifts(shiftList) {
                         }
                     }
                 }
-
-                console.log(currentID + ", " + j);
 
                 if (occupied === false) {
                     // Create and append empty cell element
