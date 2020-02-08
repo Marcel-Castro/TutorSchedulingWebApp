@@ -37,6 +37,7 @@ function main () {
     populateTutorSelector(tutors);
     populateCourseSelector(courses);
 
+    // Adds row headers (the time labels) to the lefthand side of the table
     addHeaders();
 
     // Table should be populated with empty cells by default

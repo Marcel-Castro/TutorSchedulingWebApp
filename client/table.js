@@ -1,12 +1,12 @@
 // First and last time slots in the table in military time
 const START_TIME = 8;
-const END_TIME = 24.5;
+const END_TIME = 24;
 
 // Calculate how many cells a shift should cover on the table
 function calculateRowSpan(shift) {
     var rowSpan = shift.endTime - shift.startTime;
 
-    rowSpan = (rowSpan / .5) + 1;
+    rowSpan = (rowSpan / .5) + .5;
 
     return rowSpan;
 }
@@ -217,11 +217,13 @@ function populateTableShifts(shiftList) {
 
                 for (var k = 0; k <= i; k++) {
                     if (getDayNumber(shifts[k].day) === j) {
-                        if (shifts[k].endTime >= currentID && shifts[k].startTime <= currentID) {
+                        if (shifts[k].endTime > currentID && shifts[k].startTime <= currentID) {
                             occupied = true;
                         }
                     }
                 }
+
+                console.log(currentID + ", " + j);
 
                 if (occupied === false) {
                     // Create and append empty cell element
@@ -273,8 +275,6 @@ function addHeaders() {
         var idString = currentID.toString();
         var decimal = idString.indexOf(".");
 
-        console.log(idString + ", " + decimal);
-
         if (currentID < 12) {
             if (decimal !== -1) {
                 rowText = idString.substr(0, decimal) + ":30 AM";
@@ -294,10 +294,10 @@ function addHeaders() {
             }
         } else if (currentID === 24) {
             rowText = "12:00 AM";
-        } else {
-            // Filler row for padding, contains arbitray filler text
+        } /* else {
+            // Filler row for padding, contains arbitrary filler text
             rowText = "Fill";
-        }
+        } */
 
         var newText = document.createTextNode(rowText);
 
@@ -305,11 +305,11 @@ function addHeaders() {
         newHead.classList.add("headerCol");
         newSpan.classList.add("headerColText");
 
-        if (currentID !== END_TIME) {
-            newSpan.classList.add("headerColText");
-        } else {
-            newSpan.classList.add("colOneFinal");
-        }
+        // if (currentID !== END_TIME) {
+        //     newSpan.classList.add("headerColText");
+        // } else {
+        //     newSpan.classList.add("colOneFinal");
+        // }
 
         newSpan.appendChild(newText);
         newHead.appendChild(newSpan);

@@ -54,10 +54,12 @@ td {
     border-right: #e3ab1e;
     border-bottom: #e3ab1e;
     border-top: #e3ab1e;
+    padding-right: 12px;
 }
 
 .headerColText {
-    
+    position: relative;
+    bottom: 23px;
 }
 
 .cornerCell {
