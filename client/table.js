@@ -184,6 +184,36 @@ function condenseTutorShifts (tutors, course) {
     return shifts;
 }
 
+// Generates a time label from a row ID
+function getTimeFromID(ID) {
+    var rowText;
+    var idString = ID.toString();
+    var decimal = idString.indexOf(".");
+
+    if (ID < 12) {
+        if (decimal !== -1) {
+            rowText = idString.substr(0, decimal) + ":30 AM";
+        } else {
+            rowText = idString + ":00 AM";
+        }
+    } else if (ID >= 12 && ID < 24) {
+        if (ID >= 13) {
+            idString = String (ID - 12);
+            decimal = idString.indexOf(".");
+        }
+
+        if (decimal !== -1) {
+            rowText = idString.substr(0, decimal) + ":30 PM";
+        } else {
+            rowText = idString + ":00 PM";
+        }
+    } else if (ID === 24) {
+        rowText = "12:00 AM";
+    }
+
+    return rowText;
+}
+
 // Allocate one or more shifts into the table and fill the rest of the table with empty cells
 function populateTableShifts(shiftList) {
     var currentID;
@@ -270,45 +300,13 @@ function addHeaders() {
         var newSpan = document.createElement("span");
 
         // Generate text for row headers
-        var rowText;
-        var idString = currentID.toString();
-        var decimal = idString.indexOf(".");
-
-        if (currentID < 12) {
-            if (decimal !== -1) {
-                rowText = idString.substr(0, decimal) + ":30 AM";
-            } else {
-                rowText = idString + ":00 AM";
-            }
-        } else if (currentID >= 12 && currentID < 24) {
-            if (currentID >= 13) {
-                idString = String (currentID - 12);
-                decimal = idString.indexOf(".");
-            }
-
-            if (decimal !== -1) {
-                rowText = idString.substr(0, decimal) + ":30 PM";
-            } else {
-                rowText = idString + ":00 PM";
-            }
-        } else if (currentID === 24) {
-            rowText = "12:00 AM";
-        } /* else {
-            // Filler row for padding, contains arbitrary filler text
-            rowText = "Fill";
-        } */
+        var rowText = getTimeFromID(currentID);
 
         var newText = document.createTextNode(rowText);
 
         newRow.setAttribute("id", "time_" + currentID);
         newHead.classList.add("headerCol");
         newSpan.classList.add("headerColText");
-
-        // if (currentID !== END_TIME) {
-        //     newSpan.classList.add("headerColText");
-        // } else {
-        //     newSpan.classList.add("colOneFinal");
-        // }
 
         newSpan.appendChild(newText);
         newHead.appendChild(newSpan);
