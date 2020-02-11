@@ -12,7 +12,7 @@ router.route('/').get((req, res) => {
 router.route('/add').post((req, res) => {
     const courseCode = req.body.courseCode
 
-    const newCourse = new User({
+    const newCourse = new Course({
         courseCode
     })
 
@@ -23,7 +23,7 @@ router.route('/add').post((req, res) => {
 
 // Delete course
 router.route('/:id').delete((req, res) => {
-    Exercise.findByIdAndDelete(req.params.id)
+    Course.findByIdAndDelete(req.params.id)
         .then(() => res.json('Course deleted.'))
         .catch(err => res.status(400).json('Error: ' + err))
 })

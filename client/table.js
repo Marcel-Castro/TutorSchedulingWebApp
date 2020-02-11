@@ -229,7 +229,7 @@ function populateTableShifts(shiftList) {
                 var newCell = document.createElement("td");
                 var newContainer = document.createElement("div");
                 var newSpan = document.createElement("span");
-                var newText = document.createTextNode(shifts[i].day + " from " + shifts[i].startTime + " to " + shifts[i].endTime);
+                var newText = document.createTextNode(shifts[i].day + " from " + getTimeFromID(shifts[i].startTime) + " to " + getTimeFromID(shifts[i].endTime));
                 newSpan.appendChild(newText);
                 newSpan.classList.add("shiftText");
                 newContainer.appendChild(newSpan);
