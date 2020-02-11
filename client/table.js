@@ -35,13 +35,18 @@ function sortShifts(tutorShifts) {
     var shifts = [];
     var i;
 
+    console.log(tutorShifts)
+
     shifts.push(tutorShifts[0]);
 
     for (i = 1; i < tutorShifts.length; i++) {
         var j = 0;
         var placed = false;
 
+        console.log(shifts.slice())
+
         while (j < i && placed === false) {
+            console.log("iteration")
             if (tutorShifts[i].startTime === shifts[j].startTime) {
                 var k = j;
 
@@ -50,7 +55,7 @@ function sortShifts(tutorShifts) {
                         shifts.splice(k, 0, tutorShifts[i]);
                         placed = true;
                         break;
-                    } else if (shifts[k + 1].startTime !== shifts[j].startTime) {
+                    } else if (shifts[k + 1] === undefined || shifts[k + 1].startTime !== shifts[j].startTime) {
                         shifts.splice(k + 1, 0, tutorShifts[i]);
                         placed = true;
                         break;
