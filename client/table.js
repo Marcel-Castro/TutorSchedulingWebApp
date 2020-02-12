@@ -35,18 +35,13 @@ function sortShifts(tutorShifts) {
     var shifts = [];
     var i;
 
-    console.log(tutorShifts)
-
     shifts.push(tutorShifts[0]);
 
     for (i = 1; i < tutorShifts.length; i++) {
         var j = 0;
         var placed = false;
 
-        console.log(shifts.slice())
-
         while (j < i && placed === false) {
-            console.log("iteration")
             if (tutorShifts[i].startTime === shifts[j].startTime) {
                 var k = j;
 

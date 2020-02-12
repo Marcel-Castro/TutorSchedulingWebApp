@@ -47,13 +47,13 @@ var tutors = [
             },
             {
                 day: "Thursday",
-                startTime: 21,
-                endTime: 22
+                startTime: 22,
+                endTime: 23
             },
             {
                 day: "Friday",
                 startTime: 17,
-                endTime: 22
+                endTime: 21
             }
         ]
     },
