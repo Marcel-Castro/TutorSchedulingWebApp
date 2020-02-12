@@ -8,6 +8,9 @@ const courses = [
     "CGS 2518",
     "COT 3541",
     "COT 3100",
+    "COP 4710",
+    "COP 4703",
+    "CGS 2060",
 ];
 
 // Tutors
@@ -62,6 +65,9 @@ var tutors = [
         courses: [
             "COP 2210/2250",
             "COP 3337/3804",
+            "COP 4710",
+            "COP 4703",
+            "CGS 2060",
         ],
         shifts: [
             {
@@ -73,6 +79,52 @@ var tutors = [
                 day: "Wednesday",
                 startTime: 19,
                 endTime: 21
+            },
+            {
+                day: "Friday",
+                startTime: 19,
+                endTime: 21
+            },
+            {
+                day: "Sunday",
+                startTime: 19,
+                endTime: 21
+            }
+        ]
+    },
+    {
+        name: "Danny Perez",
+        courses: [
+            "COP 2210/2250",
+            "COP 3337/3804",
+            "COP 3530",
+            "CGS 2518",
+        ],
+        shifts: [
+            {
+                day: "Monday",
+                startTime: 19,
+                endTime: 24
+            },
+            {
+                day: "Tuesday",
+                startTime: 13,
+                endTime: 15
+            },
+            {
+                day: "Wednesday",
+                startTime: 10,
+                endTime: 15
+            },
+            {
+                day: "Thursday",
+                startTime: 19,
+                endTime: 24
+            },
+            {
+                day: "Friday",
+                startTime: 12,
+                endTime: 15
             }
         ]
     }
