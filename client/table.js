@@ -288,7 +288,7 @@ function populateTableShifts(shiftList, course) {
                     // Add spans with tutor names to span containing tooltiptext css class
                     for (var z = 0; z < selectTutors.length; z++) {
                         var subSpan = document.createElement("span");
-                        var subText = document.createTextNode(selectTutors[z].name);
+                        var subText = document.createTextNode("- " + selectTutors[z].name);
                         subSpan.appendChild(subText);
                         subSpan.classList.add("toolTipSpan");
                         toolTipSpan.appendChild(subSpan);
