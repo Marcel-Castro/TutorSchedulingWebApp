@@ -104,7 +104,7 @@ function main () {
             courseHead.appendChild(newText);
 
             removeDataCells();
-            populateTableShifts(condenseTutorShifts(tutors, event.target.value));
+            populateTableShifts(condenseTutorShifts(tutors, event.target.value), event.target.value);
         }
     })
 
@@ -127,7 +127,7 @@ function main () {
             tutorHead.appendChild(newText);
 
             removeDataCells();
-            populateTableShifts(getTutorShifts(tutors, event.target.value));
+            populateTableShifts(getTutorShifts(tutors, event.target.value), "");
         }
     })
 }

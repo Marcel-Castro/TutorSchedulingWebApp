@@ -214,8 +214,41 @@ function getTimeFromID(ID) {
     return rowText;
 }
 
+// Returns a list of all tutors that cover a specified shift for a specified course TODO ---------------------
+/*
+    Note: This function can be done away with if all other functions are reworked to use tutor rather than shift
+    For now, this seems like a less time consuming and less error prone solution (at the cost of efficiency)
+*/
+function getTutorsForShift(shift, course) {
+    var targetTutors = [];
+    var selectedTutors = [];
+
+    // Get list of all tutors with specified course
+    for (var i = 0; i < tutors.length; i++) {
+        for (var j = 0; j < tutors[i].courses.length; j++) {
+            if (tutors[i].courses[j] === course) {
+                targetTutors.push(tutors[i]);
+            }
+        }
+    }
+
+    // From above list of tutors, get only the tutors that have a shift at or between the times
+    // of the specified shift, on the same day
+    for (var i = 0; i < targetTutors.length; i++) {
+        for (var j = 0; j < targetTutors[i].shifts.length; j++) {
+            if (targetTutors[i].shifts[j].day === shift.day) {
+                if (targetTutors[i].shifts[j].startTime >= shift.startTime && targetTutors[i].shifts[j].endTime <= shift.endTime) {
+                    selectedTutors.push(targetTutors[i]);
+                }
+            }
+        }
+    }
+
+    return selectedTutors;
+}
+
 // Allocate one or more shifts into the table and fill the rest of the table with empty cells
-function populateTableShifts(shiftList) {
+function populateTableShifts(shiftList, course) {
     var currentID;
     var shifts = sortShifts(shiftList);
     var i = 0;
@@ -233,6 +266,37 @@ function populateTableShifts(shiftList) {
                 newSpan.appendChild(newText);
                 newSpan.classList.add("shiftText");
                 newContainer.appendChild(newSpan);
+
+                // The following is related to adding tooltips to shifts
+                if (course !== "") {
+                    var selectTutors = [];
+
+                    // Return array of tutor names that cover current shift
+                    selectTutors = getTutorsForShift(shifts[i], course);
+
+                    newContainer.classList.add("tooltip");
+                    var toolTipSpan = document.createElement("span");
+                    toolTipSpan.classList.add("tooltiptext");
+
+                    // Create title text for tooltips
+                    var titleSpan = document.createElement("span");
+                    var titleText = document.createTextNode("Tutors Available At This Time:");
+                    titleSpan.appendChild(titleText);
+                    titleSpan.classList.add("toolTipSpan");
+                    toolTipSpan.appendChild(titleSpan);
+
+                    // Add spans with tutor names to span containing tooltiptext css class
+                    for (var z = 0; z < selectTutors.length; z++) {
+                        var subSpan = document.createElement("span");
+                        var subText = document.createTextNode(selectTutors[z].name);
+                        subSpan.appendChild(subText);
+                        subSpan.classList.add("toolTipSpan");
+                        toolTipSpan.appendChild(subSpan);
+                    }
+
+                    newContainer.appendChild(toolTipSpan);
+                }
+
                 newContainer.classList.add("shiftDiv");
                 newContainer.setAttribute("id", "shift") // Used to reference shifts later for tooltips
                 newCell.setAttribute("rowspan", String(rowspan));
