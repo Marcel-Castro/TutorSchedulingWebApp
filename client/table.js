@@ -214,7 +214,8 @@ function getTimeFromID(ID) {
     return rowText;
 }
 
-// Returns a list of all tutors that cover a specified shift for a specified course TODO ---------------------
+// Returns a list of all tutors (+ their shifts that fall under specified shift) 
+// that cover a specified shift for a specified course
 /*
     Note: This function can be done away with if all other functions are reworked to use tutor rather than shift
     For now, this seems like a less time consuming and less error prone solution (at the cost of efficiency)
@@ -233,14 +234,28 @@ function getTutorsForShift(shift, course) {
     }
 
     // From above list of tutors, get only the tutors that have a shift at or between the times
-    // of the specified shift, on the same day
+    // of the specified shift, on the same day. For those tutors, save the shifts that fall within the specified shift as well
+    // Could be multiple shifts
     for (var i = 0; i < targetTutors.length; i++) {
-        for (var j = 0; j < targetTutors[i].shifts.length; j++) {
+        const targetTutorsLength = targetTutors[i].shifts.length;
+        var target = false;
+        // Create new field in targetTutor to hold 
+        targetTutors[i].selectShifts = [];
+
+        for (var j = 0; j < targetTutorsLength; j++) {
             if (targetTutors[i].shifts[j].day === shift.day) {
                 if (targetTutors[i].shifts[j].startTime >= shift.startTime && targetTutors[i].shifts[j].endTime <= shift.endTime) {
-                    selectedTutors.push(targetTutors[i]);
+                    targetTutors[i].selectShifts.push(targetTutors[i].shifts[j]);
+                    target = true;
                 }
             }
+        }
+
+        if (target === true) {
+            // Sort selected shifts
+            //targetTutors[i].selectShifts = sortShifts(targetTutors[i].selectShifts);
+            console.log(targetTutors[i]);
+            selectedTutors.push(targetTutors[i]);
         }
     }
 
@@ -287,11 +302,20 @@ function populateTableShifts(shiftList, course) {
 
                     // Add spans with tutor names to span containing tooltiptext css class
                     for (var z = 0; z < selectTutors.length; z++) {
+                        // Create span for name
                         var subSpan = document.createElement("span");
                         var subText = document.createTextNode("- " + selectTutors[z].name);
+                        // Create span for start times
+                        // var timeSpan = document.createElement("span");
+
+                        // var timeText = document.createTextNode(selectTutors[z].startTime + " to " + selectTutors[z].endTime);
+                        
                         subSpan.appendChild(subText);
                         subSpan.classList.add("toolTipSpan");
+                        // timeSpan.appendChild(timeText);
+                        // timeSpan.classList.add("toolTipSpan");
                         toolTipSpan.appendChild(subSpan);
+                        // toolTipSpan.appendChild(timeSpan);
                     }
 
                     newContainer.appendChild(toolTipSpan);
