@@ -237,12 +237,11 @@ function getTutorsForShift(shift, course) {
     // of the specified shift, on the same day. For those tutors, save the shifts that fall within the specified shift as well
     // Could be multiple shifts
     for (var i = 0; i < targetTutors.length; i++) {
-        const targetTutorsLength = targetTutors[i].shifts.length;
         var target = false;
-        // Create new field in targetTutor to hold 
+        // Create new field in targetTutor to hold seleted shifts
         targetTutors[i].selectShifts = [];
 
-        for (var j = 0; j < targetTutorsLength; j++) {
+        for (var j = 0; j < targetTutors[i].shifts.length; j++) {
             if (targetTutors[i].shifts[j].day === shift.day) {
                 if (targetTutors[i].shifts[j].startTime >= shift.startTime && targetTutors[i].shifts[j].endTime <= shift.endTime) {
                     targetTutors[i].selectShifts.push(targetTutors[i].shifts[j]);
@@ -254,10 +253,11 @@ function getTutorsForShift(shift, course) {
         if (target === true) {
             // Sort selected shifts
             //targetTutors[i].selectShifts = sortShifts(targetTutors[i].selectShifts);
-            console.log(targetTutors[i]);
             selectedTutors.push(targetTutors[i]);
         }
     }
+
+    console.log(selectedTutors.slice());
 
     return selectedTutors;
 }
@@ -282,7 +282,7 @@ function populateTableShifts(shiftList, course) {
                 newSpan.classList.add("shiftText");
                 newContainer.appendChild(newSpan);
 
-                // The following is related to adding tooltips to shifts
+                // The following is related to adding tooltips to shifts (only done if filtering by course)
                 if (course !== "") {
                     var selectTutors = [];
 
@@ -305,17 +305,21 @@ function populateTableShifts(shiftList, course) {
                         // Create span for name
                         var subSpan = document.createElement("span");
                         var subText = document.createTextNode("- " + selectTutors[z].name);
-                        // Create span for start times
-                        // var timeSpan = document.createElement("span");
 
-                        // var timeText = document.createTextNode(selectTutors[z].startTime + " to " + selectTutors[z].endTime);
-                        
                         subSpan.appendChild(subText);
                         subSpan.classList.add("toolTipSpan");
-                        // timeSpan.appendChild(timeText);
-                        // timeSpan.classList.add("toolTipSpan");
                         toolTipSpan.appendChild(subSpan);
-                        // toolTipSpan.appendChild(timeSpan);
+
+                        // Add shifts covered by this tutor
+                        for (var y = 0; y < selectTutors[z].selectShifts.length; y++) {
+                            var timeSpan = document.createElement("span");
+                            var timeText = document.createTextNode(getTimeFromID(selectTutors[z].selectShifts[y].startTime) + " to " 
+                                + getTimeFromID(selectTutors[z].selectShifts[y].endTime));
+
+                            timeSpan.appendChild(timeText);
+                            timeSpan.classList.add("toolTipSpan");
+                            toolTipSpan.appendChild(timeSpan);
+                        }
                     }
 
                     newContainer.appendChild(toolTipSpan);
