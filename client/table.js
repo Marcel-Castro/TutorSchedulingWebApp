@@ -1,6 +1,11 @@
 // First and last time slots in the table in military time
+// Ending at a time past 24 requires adjusting the getTimeByID() function
 const START_TIME = 8;
 const END_TIME = 24;
+
+// The day of the week at which the tooltips switch from displaying on the
+// right of a shift to displaying on the left instead
+const TOOLTIP_FLIP = "Friday";
 
 // Calculate how many cells a shift should cover on the table
 function calculateRowSpan(shift) {
@@ -252,12 +257,11 @@ function getTutorsForShift(shift, course) {
 
         if (target === true) {
             // Sort selected shifts
-            //targetTutors[i].selectShifts = sortShifts(targetTutors[i].selectShifts);
+            targetTutors[i].selectShifts = sortShifts(targetTutors[i].selectShifts);
+
             selectedTutors.push(targetTutors[i]);
         }
     }
-
-    console.log(selectedTutors.slice());
 
     return selectedTutors;
 }
@@ -289,9 +293,15 @@ function populateTableShifts(shiftList, course) {
                     // Return array of tutor names that cover current shift
                     selectTutors = getTutorsForShift(shifts[i], course);
 
-                    newContainer.classList.add("tooltip");
                     var toolTipSpan = document.createElement("span");
-                    toolTipSpan.classList.add("tooltiptext");
+
+                    if (j < getDayNumber(TOOLTIP_FLIP)) {
+                        newContainer.classList.add("tooltipRIGHT");
+                        toolTipSpan.classList.add("tooltiptextRIGHT");
+                    } else {
+                        newContainer.classList.add("tooltipLEFT");
+                        toolTipSpan.classList.add("tooltiptextLEFT");
+                    }
 
                     // Create title text for tooltips
                     var titleSpan = document.createElement("span");
@@ -326,7 +336,7 @@ function populateTableShifts(shiftList, course) {
                 }
 
                 newContainer.classList.add("shiftDiv");
-                newContainer.setAttribute("id", "shift") // Used to reference shifts later for tooltips
+                newContainer.setAttribute("id", "shift") // Used to reference shifts later for tooltips --- Un-used as far as I can see
                 newCell.setAttribute("rowspan", String(rowspan));
                 newCell.classList.add("shiftCell");
                 newCell.appendChild(newContainer);

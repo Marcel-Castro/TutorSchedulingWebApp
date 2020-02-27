@@ -1,12 +1,17 @@
 /* Tooltip implementation from W3Schools with adjustments*/
 
-/* Tooltip container */
-.tooltip {
+/* Tooltip container RIGHT*/
+.tooltipRIGHT {
+    position: relative;
+}
+
+/* Tooltip container LEFT*/
+.tooltipLEFT {
     position: relative;
 }
   
-/* Tooltip text */
-.tooltip .tooltiptext {
+/* Tooltip text RIGHT SIDE*/
+.tooltipRIGHT .tooltiptextRIGHT {
     visibility: hidden;
     width: 172px;
     background-color: #081E3f;
@@ -33,23 +38,63 @@
     transition: opacity .5s;
 }
 
+/* Tooltip text LEFT SIDE*/
+.tooltipLEFT .tooltiptextLEFT {
+    visibility: hidden;
+    width: 172px;
+    background-color: #081E3f;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 18px black;
+
+    /* Add color border */
+    border-style: solid;
+    border-width: 4px;
+    border-color: #e3ab1e;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+
+    /* Tooltip fade in */
+    opacity: 0;
+    transition: opacity .5s;
+}
+
 /* Tooltip left arrow */
-.tooltip .tooltiptext::after {
+.tooltipRIGHT .tooltiptextRIGHT::after {
     content: " ";
     position: absolute;
     top: 50%;
     right: 100%;
-    margin-left: -12px;
-    border-width: 12px;
+    margin-left: -14px;
+    border-width: 14px;
     border-style: solid;
     border-color: transparent #e3ab1e transparent transparent;
+}
+
+/* Tooltip right arrow */
+.tooltipLEFT .tooltiptextLEFT::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-right: -14px;
+    border-width: 14px;
+    border-style: solid;
+    border-color: transparent transparent transparent #e3ab1e;
 }
 
 .toolTipSpan {
     display: block;
 }
 
-.tooltip:hover .tooltiptext {
+.tooltipRIGHT:hover .tooltiptextRIGHT, .tooltipLEFT:hover .tooltiptextLEFT {
     visibility: visible;
     opacity: 1;
 }
