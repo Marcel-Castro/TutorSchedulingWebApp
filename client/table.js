@@ -219,6 +219,33 @@ function getTimeFromID(ID) {
     return rowText;
 }
 
+// Sorts a list of tutors by the starting times of their "selected shifts"
+// Requires that the "selected shifts" be sorted priorly
+function sortTutorsByStartTime(selectedTutors) {
+    var selectedAndSorted = [];
+
+    selectedAndSorted.push(selectedTutors[0]);
+
+    for (var i = 1; i < selectedTutors.length; i++) {
+        var placed = false;
+        var k  = 0;
+
+        while (placed === false) {
+            if (selectedTutors[i].selectShifts[0].startTime <= selectedAndSorted[k].selectShifts[0].startTime) {
+                selectedAndSorted.splice(k, 0, selectedTutors[i]);
+                placed = true;
+            } else if (selectedAndSorted[k + 1] === undefined) {
+                selectedAndSorted.push(selectedTutors[i]);
+                placed = true;
+            } else {
+                k++;
+            }
+        }
+    }
+
+    return selectedAndSorted;
+}
+
 // Returns a list of all tutors (+ their shifts that fall under specified shift) 
 // that cover a specified shift for a specified course
 /*
@@ -263,7 +290,8 @@ function getTutorsForShift(shift, course) {
         }
     }
 
-    return selectedTutors;
+    // Sort selected tutors by starting times of their selected shifts and return result
+    return sortTutorsByStartTime(selectedTutors);
 }
 
 // Allocate one or more shifts into the table and fill the rest of the table with empty cells
@@ -314,10 +342,10 @@ function populateTableShifts(shiftList, course) {
                     for (var z = 0; z < selectTutors.length; z++) {
                         // Create span for name
                         var subSpan = document.createElement("span");
-                        var subText = document.createTextNode("- " + selectTutors[z].name);
+                        var subText = document.createTextNode(selectTutors[z].name);
 
                         subSpan.appendChild(subText);
-                        subSpan.classList.add("toolTipSpan");
+                        subSpan.classList.add("toolTipSpanTutorName");
                         toolTipSpan.appendChild(subSpan);
 
                         // Add shifts covered by this tutor

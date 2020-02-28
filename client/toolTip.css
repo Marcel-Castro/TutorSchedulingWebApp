@@ -94,6 +94,11 @@
     display: block;
 }
 
+.toolTipSpanTutorName {
+    display: block;
+    color: rgb(245, 209, 48);
+}
+
 .tooltipRIGHT:hover .tooltiptextRIGHT, .tooltipLEFT:hover .tooltiptextLEFT {
     visibility: visible;
     opacity: 1;
