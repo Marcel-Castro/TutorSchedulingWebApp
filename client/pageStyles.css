@@ -20,8 +20,14 @@ body::before {
 /* Not actually part of the table but made to look that way */
 .tableHeader {
     width: 100%;
+    min-width: 943.2px;
     background-color: #e3ab1e;
     padding: 1px 0px;
+}
+
+.mainHeader {
+    width: 100%;
+    min-width: 943.2px;
 }
 
 h1 {
@@ -41,7 +47,7 @@ select {
     font-weight: bold;
     margin: 20px 20px;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0%,#d4d4d4 100%);
 }
 
 select:focus {

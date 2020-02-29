@@ -26,6 +26,7 @@ th {
 td {
     background-color: white;
     width: 12%;
+    min-width: 86px;
 }
 
 .shiftCell  {
@@ -57,6 +58,7 @@ td {
 
 .headerCol {
     width: 9%;
+    min-width: 70px;
     text-align: right;
     border-right: #e3ab1e;
     border-bottom: #e3ab1e;

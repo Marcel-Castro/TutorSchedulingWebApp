@@ -66,6 +66,34 @@
     transition: opacity .5s;
 }
 
+/* Tooltip text for course displayer*/
+.tooltipRIGHT .tooltiptextCourse {
+    visibility: hidden;
+    width: 172px;
+    background-color: #081E3f;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 5px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 18px black;
+
+    /* Add color border */
+    border-style: solid;
+    border-width: 4px;
+    border-color: #e3ab1e;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+
+    /* Tooltip fade in */
+    opacity: 0;
+    transition: opacity .5s;
+}
+
 /* Tooltip left arrow */
 .tooltipRIGHT .tooltiptextRIGHT::after {
     content: " ";
@@ -90,6 +118,18 @@
     border-color: transparent transparent transparent #e3ab1e;
 }
 
+/* Tooltip left arrow */
+.tooltipRIGHT .tooltiptextCourse::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-left: -14px;
+    border-width: 14px;
+    border-style: solid;
+    border-color: transparent #e3ab1e transparent transparent;
+}
+
 .toolTipSpan {
     display: block;
 }
@@ -99,7 +139,7 @@
     color: rgb(245, 209, 48);
 }
 
-.tooltipRIGHT:hover .tooltiptextRIGHT, .tooltipLEFT:hover .tooltiptextLEFT {
+.tooltipRIGHT:hover .tooltiptextRIGHT, .tooltipLEFT:hover .tooltiptextLEFT, .tooltipRIGHT:hover .tooltiptextCourse {
     visibility: visible;
     opacity: 1;
 }
