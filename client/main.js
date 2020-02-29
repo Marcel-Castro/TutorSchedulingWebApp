@@ -22,6 +22,13 @@ function populateCourseSelector (courses) {
     }
 }
 
+// Assumes that all tutors have unique names
+function getTutor (tutorList, tutorName) {
+    var tutor = tutorList.filter(tutor => (tutor.name === tutorName));
+
+    return tutor[0];
+}
+
 function main () {
     // Related to selectors
     var filter = document.getElementById("filter");
@@ -33,6 +40,7 @@ function main () {
     var courseHead = document.getElementById("courseHeader");
     var tutorHead = document.getElementById("tutorHeader");
     var tutorCourses = document.getElementById("tutorCourseIndicator");
+    var tutorCoursesText = document.getElementById("tutorCourseToolTip");
 
     // Fill selectors with appropriate options from data
     populateTutorSelector(tutors);
@@ -130,6 +138,24 @@ function main () {
 
             var newText = document.createTextNode(event.target.value);
             tutorHead.appendChild(newText);
+
+            // Remove courses previously added to "courses covered" tool tip, if any
+            while (tutorCoursesText.firstChild) {
+                tutorCoursesText.removeChild(tutorCoursesText.lastChild);
+            }
+
+            // Add tutor's covered courses to the "courses covered" tool tip
+            var courseList = getTutor(tutors, event.target.value).courses;
+
+            for (var i = 0; i < courseList.length; i++) {
+                var newSpan = document.createElement("span");
+                var newText = document.createTextNode(" - " + courseList[i]);
+
+                newSpan.appendChild(newText);
+                newSpan.classList.add("toolTipSpan");
+
+                tutorCoursesText.appendChild(newSpan);
+            }
 
             removeDataCells();
             populateTableShifts(getTutorShifts(tutors, event.target.value), "");
