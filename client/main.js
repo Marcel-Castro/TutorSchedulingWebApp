@@ -32,6 +32,7 @@ function main () {
     var header = document.getElementById("header");
     var courseHead = document.getElementById("courseHeader");
     var tutorHead = document.getElementById("tutorHeader");
+    var tutorCourses = document.getElementById("tutorCourseIndicator");
 
     // Fill selectors with appropriate options from data
     populateTutorSelector(tutors);
@@ -54,6 +55,7 @@ function main () {
             header.classList.add("hide");
             courseHead.classList.add("hide");
             tutorHead.classList.add("hide");
+            tutorCourses.classList.add("hide");
             
             // Set selectors to back to defaults
             tutorSelector.value = "";
@@ -67,6 +69,7 @@ function main () {
             // Hide Header (switching filtering criteria should trigger this, subject to change)
             header.classList.add("hide");
             tutorHead.classList.add("hide");
+            tutorCourses.classList.add("hide");
     
             // Set only tutor selector back to default
             tutorSelector.value = "";
@@ -114,9 +117,11 @@ function main () {
             fillTable();
             header.classList.add("hide");
             tutorHead.classList.add("hide");
+            tutorCourses.classList.add("hide");
         } else {
             header.classList.remove("hide");
             tutorHead.classList.remove("hide");
+            tutorCourses.classList.remove("hide");
 
             if (tutorHead.childNodes.length >= 2) {
                 var textChild = tutorHead.childNodes[1];

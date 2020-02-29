@@ -9,6 +9,17 @@
 .tooltipLEFT {
     position: relative;
 }
+
+/* Tutor course display tooltip indicator */
+.tutortooltipIndicator {
+    margin-left: 14px;
+    color: #081E3f;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: bolder;
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom, #ffffff 0%,#cacaca 100%);
+}
   
 /* Tooltip text RIGHT SIDE*/
 .tooltipRIGHT .tooltiptextRIGHT {
@@ -122,7 +133,7 @@
 .tooltipRIGHT .tooltiptextCourse::after {
     content: " ";
     position: absolute;
-    top: 50%;
+    top: 20%;
     right: 100%;
     margin-left: -14px;
     border-width: 14px;

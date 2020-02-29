@@ -23,6 +23,9 @@ body::before {
     min-width: 943.2px;
     background-color: #e3ab1e;
     padding: 1px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mainHeader {
