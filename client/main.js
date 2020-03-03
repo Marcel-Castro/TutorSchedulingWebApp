@@ -1,3 +1,6 @@
+// Width threshold at which page content switches between a condensed and non-condensed form
+const MIN_WIDTH = 880;
+
 function populateTutorSelector (tutors) {
     var tutorSelector = document.getElementById("tutor");
 
@@ -9,6 +12,7 @@ function populateTutorSelector (tutors) {
         tutorSelector.appendChild(newTutor);
     }
 }
+
 
 function populateCourseSelector (courses) {
     var courseSelector = document.getElementById("course");
@@ -22,12 +26,135 @@ function populateCourseSelector (courses) {
     }
 }
 
+
 // Assumes that all tutors have unique names
 function getTutor (tutorList, tutorName) {
     var tutor = tutorList.filter(tutor => (tutor.name === tutorName));
 
     return tutor[0];
 }
+
+
+// Reposition tutor course tool tip depending on current screen width
+function positionCourseToolTip () {
+    window.addEventListener('resize', function () {
+
+        if (window.outerWidth < MIN_WIDTH) {
+            // Set tooltip to display below indicator
+        } else {
+            // Set tooltip to display right of indicator
+        }
+    });
+}
+
+
+// Update header row weekday names (between abreviated and non-abreviated) depending on current screen width
+function setRowHeaderText () {
+    var mon = document.getElementById("monday");
+    var tue = document.getElementById("tuesday");
+    var wed = document.getElementById("wednesday");
+    var thu = document.getElementById("thursday");
+    var fri = document.getElementById("friday");
+    var sat = document.getElementById("saturday");
+    var sun = document.getElementById("sunday");
+
+    function alterText () {
+        if (window.outerWidth < MIN_WIDTH && mon.firstChild !== "Mon") {
+            // Set header texts to abreviated weekday names
+            mon.removeChild(mon.childNodes[0]);
+            var newText = document.createTextNode("Mon");
+            mon.appendChild(newText);
+    
+            tue.removeChild(tue.childNodes[0]);
+            newText = document.createTextNode("Tue");
+            tue.appendChild(newText);
+    
+            wed.removeChild(wed.childNodes[0]);
+            newText = document.createTextNode("Wed");
+            wed.appendChild(newText);
+    
+            thu.removeChild(thu.childNodes[0]);
+            newText = document.createTextNode("Thu");
+            thu.appendChild(newText);
+    
+            fri.removeChild(fri.childNodes[0]);
+            newText = document.createTextNode("Fri");
+            fri.appendChild(newText);
+    
+            sat.removeChild(sat.childNodes[0]);
+            newText = document.createTextNode("Sat");
+            sat.appendChild(newText);
+    
+            sun.removeChild(sun.childNodes[0]);
+            newText = document.createTextNode("Sun");
+            sun.appendChild(newText);
+        } else {
+            // Set header texts to standard weekday names
+            if (mon.firstChild !== "Monday") {
+                mon.removeChild(mon.childNodes[0]);
+                var newText = document.createTextNode("Monday");
+                mon.appendChild(newText);
+    
+                tue.removeChild(tue.childNodes[0]);
+                newText = document.createTextNode("Tuesday");
+                tue.appendChild(newText);
+    
+                wed.removeChild(wed.childNodes[0]);
+                newText = document.createTextNode("Wednesday");
+                wed.appendChild(newText);
+    
+                thu.removeChild(thu.childNodes[0]);
+                newText = document.createTextNode("Thursday");
+                thu.appendChild(newText);
+    
+                fri.removeChild(fri.childNodes[0]);
+                newText = document.createTextNode("Friday");
+                fri.appendChild(newText);
+    
+                sat.removeChild(sat.childNodes[0]);
+                newText = document.createTextNode("Saturday");
+                sat.appendChild(newText);
+    
+                sun.removeChild(sun.childNodes[0]);
+                newText = document.createTextNode("Sunday");
+                sun.appendChild(newText);
+            }
+        }
+    }
+
+    // Run once initially to set text depending on the screen width at the time the page is loaded
+    alterText();
+
+    // Call continuously as the width of the window changes
+    window.addEventListener('resize', alterText);
+}
+
+
+// Update shift cell text content depending on current screen width // TODO: This needs to be updated when selector events occur as well
+function updateShiftCellText () {
+    var shiftText = document.getElementsByClassName("shiftText");
+
+    function alterShiftText () {
+        if (window.outerWidth < MIN_WIDTH) {
+            // Set cell text content to smaller font size and abbreviate weekday name
+            for (var i = 0; i < shiftText.length; i++) {
+                shiftText[i].classList.add("hide");
+            }
+        } else {
+            // Set cell text to default appearance
+            for (var i = 0; i < shiftText.length; i++) {
+                shiftText[i].classList.remove("hide");
+            }
+        }
+    }
+
+    // Run once initially to set text depending on the screen width at the time the page is loaded
+    alterShiftText();
+
+    // Call continuously as the width of the window changes
+    window.addEventListener('resize', alterShiftText);
+}
+
 
 function main () {
     // Related to selectors
@@ -52,6 +179,14 @@ function main () {
     // Table should be populated with empty cells by default
     fillTable();
 
+    // Screen resize event handlers
+    setRowHeaderText();
+
+    updateShiftCellText();
+
+    positionCourseToolTip();
+
+    // Selector changes event handlers
     filter.addEventListener("change", (event) => {
         if (event.target.value === "") {
             removeDataCells();

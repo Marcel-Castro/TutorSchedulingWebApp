@@ -20,7 +20,7 @@ body::before {
 /* Not actually part of the table but made to look that way */
 .tableHeader {
     width: 100%;
-    min-width: 943.2px;
+    min-width: 658.4px;
     background-color: #e3ab1e;
     padding: 1px 0px;
     display: flex;

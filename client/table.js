@@ -16,6 +16,7 @@ function calculateRowSpan(shift) {
     return rowSpan;
 }
 
+
 // Assign numerical value to day of the week
 function getDayNumber(day) {
     if (day === "Monday") {
@@ -34,6 +35,7 @@ function getDayNumber(day) {
         return 7;
     }
 }
+
 
 // Returns an array of shifts sorted by starting time first and day second
 function sortShifts(tutorShifts) {
@@ -79,6 +81,7 @@ function sortShifts(tutorShifts) {
     return shifts;
 }
 
+
 // Get array containing only the shifts of tutors who cover specified course
 function getShiftsByCourse (tutors, course) {
     var shifts = [];
@@ -102,6 +105,7 @@ function getShiftsByCourse (tutors, course) {
     return shifts;
 }
 
+
 // Removes duplicate shifts in a list of shifts
 function removeDuplicates (shifts) {
     for (var i = 0; i < shifts.length; i++) {
@@ -115,6 +119,7 @@ function removeDuplicates (shifts) {
 
     return shifts;
 }
+
 
 // Take an array of shifts and join shifts with overlapping times into single elements
 function joinOverlapping (shifts) {
@@ -173,6 +178,7 @@ function joinOverlapping (shifts) {
     return shifts;
 }
 
+
 // Creates a list of all the shifts covered by tutors who cover the specified course
 function condenseTutorShifts (tutors, course) {
     var shifts = [];
@@ -188,6 +194,7 @@ function condenseTutorShifts (tutors, course) {
 
     return shifts;
 }
+
 
 // Generates a time label from a row ID
 function getTimeFromID(ID) {
@@ -219,6 +226,7 @@ function getTimeFromID(ID) {
     return rowText;
 }
 
+
 // Sorts a list of tutors by the starting times of their "selected shifts"
 // Requires that the "selected shifts" be sorted priorly
 function sortTutorsByStartTime(selectedTutors) {
@@ -245,6 +253,7 @@ function sortTutorsByStartTime(selectedTutors) {
 
     return selectedAndSorted;
 }
+
 
 // Returns a list of all tutors (+ their shifts that fall under specified shift) 
 // that cover a specified shift for a specified course
@@ -293,6 +302,7 @@ function getTutorsForShift(shift, course) {
     // Sort selected tutors by starting times of their selected shifts and return result
     return sortTutorsByStartTime(selectedTutors);
 }
+
 
 // Allocate one or more shifts into the table and fill the rest of the table with empty cells
 function populateTableShifts(shiftList, course) {
@@ -394,6 +404,7 @@ function populateTableShifts(shiftList, course) {
     }
 }
 
+
 // Populate table with empty cells (represents default state of table)
 function fillTable() {
     for (currentID = START_TIME; currentID <= END_TIME; currentID = currentID + .5) {
@@ -404,6 +415,7 @@ function fillTable() {
     }
 }
 
+
 // Remove all data cells from the table
 function removeDataCells() {
     var cells = document.getElementsByTagName("TD");
@@ -413,12 +425,14 @@ function removeDataCells() {
     }
 }
 
+
 // Get the shift list from a single tutor (assumes all tutors have a unique name)
 function getTutorShifts(tutorList, tutorName) {
     var tutor = tutorList.filter(tutor => (tutor.name === tutorName));
 
     return tutor[0].shifts;
 }
+
 
 // Generate left side headers for the table
 function addHeaders() {
