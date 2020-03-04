@@ -129,8 +129,8 @@
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    top: -5px;
-    left: 105%;
+    top: 115%;
+    left: 0%;
 
     /* Tooltip fade in */
     opacity: 0;
@@ -177,12 +177,12 @@
 .tooltipBOTTOM .tooltiptextCourse::after {
     content: " ";
     position: absolute;
-    top: 6px;
-    right: 100%;
+    bottom: 100%;
+    left: 50%;
     margin-left: -14px;
     border-width: 14px;
     border-style: solid;
-    border-color: transparent #081E3f transparent transparent;
+    border-color: transparent transparent #081E3f transparent;
 }
 
 .toolTipSpan {

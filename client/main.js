@@ -35,16 +35,29 @@ function getTutor (tutorList, tutorName) {
 }
 
 
-// Reposition tutor course tool tip depending on current screen width
-function positionCourseToolTip () {
-    window.addEventListener('resize', function () {
-
+// Reposition tutor course tool tip depending on current screen width (callback)
+function positionToolTip (tooltipPosition) {
+    return function () {
         if (window.outerWidth < MIN_WIDTH) {
             // Set tooltip to display below indicator
+            tooltipPosition.classList.remove("tooltipRIGHT");
+            tooltipPosition.classList.add("tooltipBOTTOM");
         } else {
             // Set tooltip to display right of indicator
+            tooltipPosition.classList.remove("tooltipBOTTOM");
+            tooltipPosition.classList.add("tooltipRIGHT");
         }
-    });
+    }
+}
+
+
+// Update tutor course tool tip position depending on current screen width
+function positionCourseToolTip (tooltipPosition) {
+    // Run once initially to set text depending on the screen width at the time the page is loaded
+    positionToolTip(tooltipPosition);
+
+    // Call continuously as the width of the window changes
+    window.addEventListener('resize', positionToolTip(tooltipPosition));
 }
 
 
@@ -130,7 +143,7 @@ function setRowHeaderText () {
 }
 
 
-// Alters shift cell text depending on screen width
+// Alters shift cell text depending on screen width (callback)
 function alterShiftText (shiftText) {
     // Closure scope for the purpose of making the outer function work as a callback with parameters
     return function () {
@@ -194,6 +207,7 @@ function main () {
     var tutorHead = document.getElementById("tutorHeader");
     var tutorCourses = document.getElementById("tutorCourseIndicator");
     var tutorCoursesText = document.getElementById("tutorCourseToolTip");
+    var tooltipPosition = document.getElementById("tutorCourseIndicator");
     
     // Related to shift cells
     var shiftText = document.getElementsByClassName("shiftText");
@@ -215,7 +229,7 @@ function main () {
 
     updateTableHeader();
 
-    // positionCourseToolTip(); TODO ----------------
+    positionCourseToolTip(tooltipPosition);
 
     // Selector changes event handlers
     filter.addEventListener("change", (event) => {
@@ -335,6 +349,11 @@ function main () {
             // Syntax is on account of alterShiftText being setup to work as a callback function
             var altTextFunc = alterShiftText(shiftText);
             altTextFunc();
+
+            // Courses covered tooltip will be repositioned based on selector events
+            // Suntax is on account of positionToolTip being setup to work as a callback function
+            var positionToolTipFunc = positionToolTip(tooltipPosition);
+            positionToolTipFunc();
         }
     })
 }
