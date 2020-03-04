@@ -158,18 +158,18 @@ function updateShiftCellText (shiftText) {
 
 // Updates table header text depending on current screen width
 function updateTableHeader () {
-    var tableHeaderText = document.getElementsByClassName("h2");
+    var tableHeaderText = document.getElementsByTagName("H2");
 
     function alterHeader () {
         if (window.outerWidth < MIN_WIDTH) {
             // Set header to condensed version
             for (var i = 0; i < tableHeaderText.length; i++) {
-                tableHeaderText[i].classList.add(".h2_SmallFont");
+                tableHeaderText[i].classList.add("h2_SmallFont");
             }
         } else {
             // Set header to regular version
             for (var i = 0; i < tableHeaderText.length; i++) {
-                tableHeaderText[i].classList.remove(".h2_SmallFont");
+                tableHeaderText[i].classList.remove("h2_SmallFont");
             }
         }
     }
@@ -179,8 +179,6 @@ function updateTableHeader () {
 
     // Call continuously as the width of the window changes
     window.addEventListener('resize', alterHeader);
-
-    console.log("check")
 }
 
 
