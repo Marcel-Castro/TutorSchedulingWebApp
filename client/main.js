@@ -130,11 +130,10 @@ function setRowHeaderText () {
 }
 
 
-// Update shift cell text content depending on current screen width // TODO: This needs to be updated when selector events occur as well
-function updateShiftCellText () {
-    var shiftText = document.getElementsByClassName("shiftText");
-
-    function alterShiftText () {
+// Alters shift cell text depending on screen width
+function alterShiftText (shiftText) {
+    // Closure scope for the purpose of making the outer function work as a callback with parameters
+    return function () {
         if (window.outerWidth < MIN_WIDTH) {
             // Set cell text content to smaller font size and abbreviate weekday name
             for (var i = 0; i < shiftText.length; i++) {
@@ -147,12 +146,41 @@ function updateShiftCellText () {
             }
         }
     }
+}
+
+
+// Update shift cell text content depending on current screen width
+function updateShiftCellText (shiftText) {
+    // Call continuously as the width of the window changes
+    window.addEventListener('resize', alterShiftText(shiftText));
+}
+
+
+// Updates table header text depending on current screen width
+function updateTableHeader () {
+    var tableHeaderText = document.getElementsByClassName("h2");
+
+    function alterHeader () {
+        if (window.outerWidth < MIN_WIDTH) {
+            // Set header to condensed version
+            for (var i = 0; i < tableHeaderText.length; i++) {
+                tableHeaderText[i].classList.add(".h2_SmallFont");
+            }
+        } else {
+            // Set header to regular version
+            for (var i = 0; i < tableHeaderText.length; i++) {
+                tableHeaderText[i].classList.remove(".h2_SmallFont");
+            }
+        }
+    }
 
     // Run once initially to set text depending on the screen width at the time the page is loaded
-    alterShiftText();
+    alterHeader();
 
     // Call continuously as the width of the window changes
-    window.addEventListener('resize', alterShiftText);
+    window.addEventListener('resize', alterHeader);
+
+    console.log("check")
 }
 
 
@@ -168,6 +196,9 @@ function main () {
     var tutorHead = document.getElementById("tutorHeader");
     var tutorCourses = document.getElementById("tutorCourseIndicator");
     var tutorCoursesText = document.getElementById("tutorCourseToolTip");
+    
+    // Related to shift cells
+    var shiftText = document.getElementsByClassName("shiftText");
 
     // Fill selectors with appropriate options from data
     populateTutorSelector(tutors);
@@ -182,9 +213,11 @@ function main () {
     // Screen resize event handlers
     setRowHeaderText();
 
-    updateShiftCellText();
+    updateShiftCellText(shiftText);
 
-    positionCourseToolTip();
+    updateTableHeader();
+
+    // positionCourseToolTip(); TODO ----------------
 
     // Selector changes event handlers
     filter.addEventListener("change", (event) => {
@@ -251,6 +284,11 @@ function main () {
 
             removeDataCells();
             populateTableShifts(condenseTutorShifts(tutors, event.target.value), event.target.value);
+
+            // Shift text will be changed between condensed vs regular at the time that selector event occurs
+            // Syntax is on account of alterShiftText being setup to work as a callback function
+            var altTextFunc = alterShiftText(shiftText);
+            altTextFunc();
         }
     })
 
@@ -294,6 +332,11 @@ function main () {
 
             removeDataCells();
             populateTableShifts(getTutorShifts(tutors, event.target.value), "");
+
+            // Shift text will be changed between condensed vs regular at the time that selector event occurs
+            // Syntax is on account of alterShiftText being setup to work as a callback function
+            var altTextFunc = alterShiftText(shiftText);
+            altTextFunc();
         }
     })
 }

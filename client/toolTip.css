@@ -173,6 +173,18 @@
     border-color: transparent #081E3f transparent transparent;
 }
 
+/* Tooltip tip arrow (For course displayer) */
+.tooltipBOTTOM .tooltiptextCourse::after {
+    content: " ";
+    position: absolute;
+    top: 6px;
+    right: 100%;
+    margin-left: -14px;
+    border-width: 14px;
+    border-style: solid;
+    border-color: transparent #081E3f transparent transparent;
+}
+
 .toolTipSpan {
     display: block;
 }
@@ -182,8 +194,7 @@
     color: rgb(245, 209, 48);
 }
 
-.tooltipRIGHT:hover .tooltiptextRIGHT, .tooltipLEFT:hover .tooltiptextLEFT, 
-    .tooltipRIGHT:hover .tooltiptextCourse, .tooltipBOTTOM:hover .tooltiptextCourse {
+.tooltipRIGHT:hover .tooltiptextRIGHT, .tooltipLEFT:hover .tooltiptextLEFT, .tooltipRIGHT:hover .tooltiptextCourse, .tooltipBOTTOM:hover .tooltiptextCourse {
     visibility: visible;
     opacity: 1;
 }
