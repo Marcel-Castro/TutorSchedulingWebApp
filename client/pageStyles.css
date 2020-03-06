@@ -31,6 +31,9 @@ body::before {
 .mainHeader {
     width: 100%;
     min-width: 658.4px;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 h1 {
@@ -68,27 +71,40 @@ option {
 .entryMessage {
     /* Positioning */
     position: absolute;
-    z-index: 1;
+    z-index: 10;
+    top: 295%;
 
     /* Border styling */
     border-radius: 10px;
     border-style: solid;
     border-width: 6px;
-    border-color: #081E3f;
+    border-color: #e3ab1e;
+    
+    /* Box shadow */
+    box-shadow: 5px 10px 18px black;
 
     /* General styling */
-    background-color: #ffffff;
+    width: 40%;
+    min-width: 320px;
+    background-color: #081E3f;
     padding: 36px 60px;
 }
 
+@media only screen and (max-width: 780px) {
+    .entryMessage {
+        left: 24%;
+    }
+  }
+
 .entrySpan {
-    color: #081E3f;
+    color: #ffffff;
     display: block;
     margin-top: 8px;
     font-weight: bold;
 }
 
 .entrySpan:first-child {
+    color: #e3ab1e;
     font-size: 24px;
     text-align: center;
     margin-top: 0px;

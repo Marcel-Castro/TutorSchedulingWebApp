@@ -69,6 +69,7 @@ td {
 .headerColText {
     position: relative;
     bottom: 23px;
+    z-index: .5;
 }
 
 .cornerCell {
