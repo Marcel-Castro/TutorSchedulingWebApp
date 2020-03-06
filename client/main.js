@@ -38,7 +38,7 @@ function getTutor (tutorList, tutorName) {
 // Reposition tutor course tool tip depending on current screen width (callback)
 function positionToolTip (tooltipPosition) {
     return function () {
-        if (window.outerWidth < MIN_WIDTH) {
+        if (window.outerWidth < MIN_WIDTH + 160) {
             // Set tooltip to display below indicator
             tooltipPosition.classList.remove("tooltipRIGHT");
             tooltipPosition.classList.add("tooltipBOTTOM");
@@ -212,6 +212,9 @@ function main () {
     // Related to shift cells
     var shiftText = document.getElementsByClassName("shiftText");
 
+    // Related to entry messaage
+    var entryMessage = document.getElementById("entryMessage");
+
     // Fill selectors with appropriate options from data
     populateTutorSelector(tutors);
     populateCourseSelector(courses);
@@ -224,11 +227,8 @@ function main () {
 
     // Screen resize event handlers
     setRowHeaderText();
-
     updateShiftCellText(shiftText);
-
     updateTableHeader();
-
     positionCourseToolTip(tooltipPosition);
 
     // Selector changes event handlers
@@ -248,6 +248,9 @@ function main () {
             // Set selectors to back to defaults
             tutorSelector.value = "";
             courseSelector.value = "";
+
+            // Unhide entry message
+            entryMessage.classList.remove("hide");
         } else if (event.target.value === "course") {
             removeDataCells();
             fillTable();
@@ -302,6 +305,9 @@ function main () {
             var altTextFunc = alterShiftText(shiftText);
             altTextFunc();
         }
+
+        // Hide entry message
+        entryMessage.classList.add("hide");
     })
 
     tutorSelector.addEventListener("change", (event) => {
@@ -355,5 +361,8 @@ function main () {
             var positionToolTipFunc = positionToolTip(tooltipPosition);
             positionToolTipFunc();
         }
+
+        // Hide entry message
+        entryMessage.classList.add("hide");
     })
 }
