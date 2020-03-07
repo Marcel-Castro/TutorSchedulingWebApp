@@ -15,7 +15,7 @@ const courses = [
 
 // Tutors
 
-var tutors = [
+const tutors = [
     {
         name: "Marcel Castro",
         courses: [
