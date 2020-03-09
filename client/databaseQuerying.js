@@ -2,7 +2,7 @@ var tutors = [];
 var courses = [];
 
 // Tutor queries ----------------------------
-function populateTutorsArray () {
+function populateTutorsArray (populateTutorSelector) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -12,6 +12,8 @@ function populateTutorsArray () {
             var resData = JSON.parse(xhttp.responseText);
 
             tutors = resData;
+
+            populateTutorSelector(tutors);
         }
     }
     xhttp.open("GET", "http://localhost:4000/tutors/", true);
@@ -35,7 +37,7 @@ function deleteAllTutors () {
 }
 
 // Course queries ----------------------------
-function populateCoursesArray () {
+function populateCoursesArray (populateCourseSelector) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -47,6 +49,8 @@ function populateCoursesArray () {
             for (var i = 0; i < resData.length; i++) {
                 courses.push(resData[i].courseCode);
             }
+
+            populateCourseSelector(courses);
         }
     }
     xhttp.open("GET", "http://localhost:4000/courses/");

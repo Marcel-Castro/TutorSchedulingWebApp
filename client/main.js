@@ -1,19 +1,6 @@
 // Width threshold at which page content switches between a condensed and non-condensed form
 const MIN_WIDTH = 880;
 
-function populateTutorSelector (tutors) {
-    var tutorSelector = document.getElementById("tutor");
-
-    for (var i = 0; i < tutors.length; i++) {
-        var newTutor = document.createElement("option");
-        var newName = document.createTextNode(tutors[i].name);
-        newTutor.appendChild(newName);
-        newTutor.setAttribute("value", tutors[i].name);
-        tutorSelector.appendChild(newTutor);
-    }
-}
-
-
 function populateCourseSelector (courses) {
     var courseSelector = document.getElementById("course");
 
@@ -23,6 +10,19 @@ function populateCourseSelector (courses) {
         newCourse.appendChild(newName);
         newCourse.setAttribute("value", courses[i]);
         courseSelector.appendChild(newCourse);
+    }
+}
+
+
+function populateTutorSelector (tutors) {
+    var tutorSelector = document.getElementById("tutor");
+
+    for (var i = 0; i < tutors.length; i++) {
+        var newTutor = document.createElement("option");
+        var newName = document.createTextNode(tutors[i].name);
+        newTutor.appendChild(newName);
+        newTutor.setAttribute("value", tutors[i].name);
+        tutorSelector.appendChild(newTutor);
     }
 }
 
@@ -196,9 +196,9 @@ function updateTableHeader () {
 
 
 function main () {
-    // Populate "courses" and "tutors" arrays
-    populateCoursesArray();
-    // populateTutorsArray();
+    // Populate "courses" and "tutors" arrays and corresponding selectors
+    populateCoursesArray(populateCourseSelector);
+    populateTutorsArray(populateTutorSelector);
 
     // Related to selectors
     var filter = document.getElementById("filter");
@@ -218,10 +218,6 @@ function main () {
 
     // Related to entry messaage
     var entryMessage = document.getElementById("entryMessage");
-
-    // Fill selectors with appropriate options from data
-    populateTutorSelector(tutors);
-    populateCourseSelector(courses);
 
     // Adds row headers (the time labels) to the lefthand side of the table
     addHeaders();
