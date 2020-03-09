@@ -8,9 +8,9 @@ const shiftSchema = new Schema({
 })
 
 const tutorSchema = new Schema({
-    tutorName: {type: String, required: true},
-    shifts: [shiftSchema],
-    courses: [{type: String}]
+    name: {type: String, required: true},
+    courses: [{type: String}],
+    shifts: [shiftSchema]
 })
 
 const tutor = mongoose.model('Tutor', tutorSchema);

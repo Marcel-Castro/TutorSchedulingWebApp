@@ -196,6 +196,10 @@ function updateTableHeader () {
 
 
 function main () {
+    // Populate "courses" and "tutors" arrays
+    populateCoursesArray();
+    // populateTutorsArray();
+
     // Related to selectors
     var filter = document.getElementById("filter");
     var courseSelector = document.getElementById("course");

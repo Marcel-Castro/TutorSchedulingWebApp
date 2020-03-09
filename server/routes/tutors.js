@@ -8,23 +8,16 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
-// Get tutors by course
-router.route('/byCourse/:courseCode').get((req, res) => {
-    Tutor.find({courses: req.params.courseCode})
-        .then(exercises => res.json(exercises))
-        .catch(err => res.status(400).json('Error: ' + err))
-})
-
 // Create tutor
 router.route('/add').post((req, res) => {
-    const tutorName = req.body.tutorName;
+    const name = req.body.name;
     const shifts = req.body.shifts;
-    const course = req.body.courses;
+    const courses = req.body.courses;
 
     const newTutor = new Tutor({
-        tutorName,
+        name,
         shifts,
-        course
+        courses
     })
 
     newTutor.save()
@@ -36,9 +29,9 @@ router.route('/add').post((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Tutor.findById(req.params.id)
         .then(tutor => {
-            tutor.tutorName = req.body.exerciseName;
-            tutor.shifts = req.body.notes;
-            tutor.courses = req.body.sets;
+            tutor.name = req.body.name;
+            tutor.shifts = req.body.shifts;
+            tutor.courses = req.body.courses;
 
             tutor.save()
                 .then(() => res.json('Tutor updated!'))
@@ -48,7 +41,7 @@ router.route('/update/:id').post((req, res) => {
 })
 
 // Delete tutor
-router.route('/:id').delete((req, res) => {
+router.route('/deleteOne/:id').delete((req, res) => {
     Tutor.findByIdAndDelete(req.params.id)
         .then(() => res.json('Tutor deleted.'))
         .catch(err => res.status(400).json('Error: ' + err))
@@ -56,7 +49,7 @@ router.route('/:id').delete((req, res) => {
 
 // Delete All
 router.route('/deleteAll').delete((req, res) => {
-    Tutor.deleteMany({}, callback)
+    Tutor.deleteMany({})
         .then(() => res.json('All tutors deleted.'))
         .catch(err => res.status(400).json('Error: ' + err))
 })
