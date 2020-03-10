@@ -8,6 +8,13 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))
 })
 
+// Get one tutor
+router.route('/getTutor/:id').get((req, res) => {
+    Tutor.findById(req.params.id)
+        .then(tutors => res.json(tutors))
+        .catch(err => res.status(400).json('Error: ' + err))
+})
+
 // Create tutor
 router.route('/add').post((req, res) => {
     const name = req.body.name;

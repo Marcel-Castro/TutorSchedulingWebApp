@@ -3,11 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor List</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="stylesheet" href="adminPage.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="tutorList.css">
+
+    <script src="../databaseQuerying.js"></script>
+    <script src="tutorList.js"></script>
+
+    <title>Tutor List</title>
 </head>
 <body>
-    
+    <ul>
+        <li>STARS Scheduling</li>
+        <li><a href="tutorList.html">Tutors</a></li>
+        <li><a href="courseList.html">Courses</a></li>
+        <li style="float:right"><a href="login.html">Logout</a></li>
+    </ul>
+    <div class="gridContainer">
+        <div id="tutorList" class="gridItem1"></div>
+        <div id="coursesCovered">
+            <div class="header">Courses Covered by this Tutor:</div>
+        </div>
+        <div id="shiftsCovered">
+            <div class="header">Times covered by this Tutor:</div>
+        </div>
+    </div>
+    <script>
+        main();
+    </script>
 </body>
 </html>
