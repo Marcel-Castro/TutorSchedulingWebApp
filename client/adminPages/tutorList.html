@@ -22,12 +22,19 @@
         <li style="float:right"><a href="login.html">Logout</a></li>
     </ul>
     <div class="gridContainer">
-        <div id="tutorList" class="gridItem1"></div>
-        <div id="coursesCovered">
-            <div class="header">Courses Covered by this Tutor:</div>
+        <div class="item gridItem1">
+            <div id="tutorList" class="listContainer"></div>
+            <div class="header">
+                <button class="tutorCardButton">Add Tutor</button>
+            </div>
         </div>
-        <div id="shiftsCovered">
+        <div class="item gridItem2">
+            <div class="header">Courses Covered by this Tutor:</div>
+            <div id="coursesCovered" class="listContainer"></div>
+        </div>
+        <div class="item gridItem3">
             <div class="header">Times covered by this Tutor:</div>
+            <div id="shiftsCovered" class="listContainer"></div>
         </div>
     </div>
     <script>

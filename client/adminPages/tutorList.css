@@ -1,5 +1,6 @@
 body, html {
     font-family: 'Noto Sans', sans-serif;
+    height: 100%;
     width: 100%;
     margin: 0;
 }
@@ -17,10 +18,19 @@ body::before {
 }
 
 .gridContainer {
+    height: 87%;
     width: 94%;
     margin: auto;
     display: grid;
-    grid-gap: 30px;
+    grid-gap: 20px;
+}
+
+.item {
+    border-radius: 10px;
+    background-color: rgb(233, 233, 233);
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
 }
 
 .gridItem1 {
@@ -28,30 +38,129 @@ body::before {
     grid-column-end: 2;
     grid-row-start: 1;
     grid-row-end: 3;
+    padding: 16px
+}
+
+.gridItem2 {
+    grid-column-start: 2;
+}
+
+.gridItem3 {
+    grid-column-start: 2;
+}
+
+@media only screen and (max-width: 720px) {
+    .gridItem1 {
+        grid-column-start: auto;
+        grid-column-end: auto;
+        grid-row-start: auto;
+        grid-row-end: auto;
+    }
+
+    .gridItem2 {
+        grid-column-start: auto;
+    }
+
+    .gridItem3 {
+        grid-column-start: auto;
+        margin-bottom: 16px;
+    }
+
+    .gridContainer {
+        height: 140%;
+    }
+}
+
+.header {
+    padding: 10px;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #081E3f;
+}
+
+.header:last-child {
+    margin-top: 9px;
+}
+
+.listContainer {
+    flex-grow : 1;
+    background-color: rgb(207, 207, 207);
+    border-style: none;
+    border-radius: 10px;
+    padding: 5px 8px;
+    margin-top: 7px;
+    overflow-y: scroll;
+}
+
+.listContainer:first-child {
+    margin-top: 0;
 }
 
 .tutorCard {
+    display: flex;
+    align-items: center;
     background-color: #081E3f;
     border-style: solid;
     border-color: #e3ab1e;
     border-width: 4px;
     border-radius: 10px;
-    padding: 20px;
+    padding: 14px;
+    margin-top: 8px;
+    transition: background-color .5s;
+}
+
+.tutorCard:last-child {
+    margin-bottom: 8px;
+}
+
+.tutorCard:hover {
+    background-color: rgb(3, 16, 34);
 }
 
 .tutorCardSpan {
     color: white;
+    font-weight: bold;
+}
+
+.buttonWrapper {
+    margin-left: auto;
+}
+
+.tutorCardButton {
+    color: #081E3f;
+    font-weight: bold;
+    padding: 9px;
+    font-size: 18px;
+    margin-left: 16px;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+    border-style: none;
+    background-color: white;
+    transition: color .5s, background-color .5s;
+}
+
+.header .tutorCardButton {
+    padding: 9px 30px;
+}
+
+.tutorCardButton:hover {
+    background-color: rgb(207, 207, 207);
+    color: rgb(66, 142, 255);
 }
 
 ul {
+    min-width: 540px;
     list-style-type: none;
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 16px;
     padding: 0px 20px;
     overflow: hidden;
     background-color: #081E3f;
     position: -webkit-sticky; /* Safari */
     position: sticky;
+    z-index: 10;
     top: 0;
 }
   
