@@ -77,6 +77,9 @@ body::before {
     text-align: center;
     border-radius: 10px;
     background-color: #081E3f;
+    border-style: solid;
+    border-color: #e3ab1e;
+    border-width: 4px;
 }
 
 .header:last-child {
@@ -122,9 +125,6 @@ body::before {
     display: flex;
     align-items: center;
     background-color: #081E3f;
-    border-style: solid;
-    border-color: #e3ab1e;
-    border-width: 4px;
     border-radius: 10px;
     padding: 14px 28px;
     margin-top: 8px;
