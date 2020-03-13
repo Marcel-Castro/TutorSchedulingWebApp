@@ -1,0 +1,65 @@
+.gridItem1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: auto;
+    grid-row-end: auto;
+    padding: 16px
+}
+
+.gridItem2 {
+    grid-column-start: 2;
+}
+
+@media only screen and (max-width: 940px) {
+    .gridItem2 {
+        grid-column-start: auto;
+        margin-bottom: 16px;
+    }
+}
+
+.courseCard {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    background-color: #081E3f;
+    border-radius: 10px;
+    padding: 12px 24px;
+    margin-top: 8px;
+    transition: background-color .5s;
+}
+
+.courseCard:last-child {
+    margin-bottom: 8px;
+}
+
+.courseCard:hover {
+    background-color: rgb(3, 16, 34);
+}
+
+.courseCardButton {
+    margin-left: auto;
+    color: #081E3f;
+    font-weight: bold;
+    padding: 9px;
+    font-size: 18px;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+    border-style: none;
+    background-color: white;
+    transition: color .5s, background-color .5s;
+}
+
+.header form .tutorCardButton {
+    padding: 9px 14px;
+}
+
+input[type=text] {
+    font-size: 18px;
+    width: auto;
+    padding: 8px 8px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    box-sizing: border-box;
+}

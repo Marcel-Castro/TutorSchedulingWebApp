@@ -1,0 +1,58 @@
+body, html {
+    font-family: 'Noto Sans', sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+/* Adds top shadow to page */
+body::before {
+    content: "";
+    position: fixed;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    box-shadow: 0px 0 14px rgba(0, 0, 0, 0.8);
+    z-index: 100;
+}
+
+ul {
+    min-width: 540px;
+    list-style-type: none;
+    margin: 0;
+    margin-bottom: 16px;
+    padding: 0px 20px;
+    overflow: hidden;
+    background-color: #081E3f;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    z-index: 10;
+    top: 0;
+}
+  
+li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    margin-top: 5px;
+}
+
+li:first-child {
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 0;
+    color: #e3ab1e;
+}
+
+li a {
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: rgb(189, 189, 189);
+}

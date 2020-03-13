@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="pageStyles.css">
+    <link rel="stylesheet" href="tutorList.css">
+    <link rel="stylesheet" href="courseList.css">
+
+    <script src="../databaseQuerying.js"></script>
+    <script src="courseList.js"></script>
+
+    <title>STARS Scheduling</title>
+</head>
+<body>
+    <ul>
+        <li>STARS Scheduling</li>
+        <li><a href="tutorList.html">Tutors</a></li>
+        <li><a href="courseList.html">Courses</a></li>
+        <li style="float:right"><a href="login.html">Logout</a></li>
+    </ul>
+    <div class="gridContainer">
+        <div class="item gridItem1">
+            <div id="courseList" class="listContainer"></div>
+            <div class="header">
+                <form>
+                    <input type="text" id="courseCode" name="courseCode" placeholder="Course Code" value="">
+                    <button type="submit" class="tutorCardButton">Add Course</button>
+                </form>
+            </div>
+        </div>
+        <div class="item gridItem2">
+            <div class="header">Tutors Covering this Course:</div>
+            <div id="tutorsCovering" class="listContainer"></div>
+        </div>
+    </div>
+    <script>
+        main();
+    </script>
+</body>
+</html>

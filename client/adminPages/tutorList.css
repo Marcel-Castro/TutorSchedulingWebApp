@@ -1,36 +1,21 @@
-body, html {
-    font-family: 'Noto Sans', sans-serif;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-}
-
-/* Adds top shadow to page */
-body::before {
-    content: "";
-    position: fixed;
-    top: -15px;
-    left: 0;
-    width: 100%;
-    height: 15px;
-    box-shadow: 0px 0 14px rgba(0, 0, 0, 0.8);
-    z-index: 100;
-}
-
 .gridContainer {
     height: 87%;
     width: 94%;
     margin: auto;
     display: grid;
     grid-column-gap: 5px;
+    /* Equal row widths */
+    grid-auto-columns: 1fr;
+    /* Equal column heights */
+    grid-auto-rows: 1fr;
 }
 
 .item {
     border-radius: 10px;
-    /* background-color: rgb(233, 233, 233); */
     padding: 10px;
     display: flex;
     flex-flow: column;
+    overflow: auto;
 }
 
 .gridItem1 {
@@ -49,7 +34,7 @@ body::before {
     grid-column-start: 2;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 940px) {
     .gridItem1 {
         grid-column-start: auto;
         grid-column-end: auto;
@@ -139,6 +124,13 @@ body::before {
     background-color: rgb(3, 16, 34);
 }
 
+/* TODO */
+.tutorCardClicked {
+    -moz-box-shadow: inset 0 0 20px white;
+    -webkit-box-shadow: inset 0 0 20px white;
+    box-shadow: inset 0 0 20px white;
+}
+
 .tutorCardSpan {
     color: white;
     font-weight: bold;
@@ -162,51 +154,11 @@ body::before {
     transition: color .5s, background-color .5s;
 }
 
-.header .tutorCardButton {
+.header a .tutorCardButton {
     padding: 9px 30px;
 }
 
 .tutorCardButton:hover {
     background-color: rgb(207, 207, 207);
     color: rgb(66, 142, 255);
-}
-
-ul {
-    min-width: 540px;
-    list-style-type: none;
-    margin: 0;
-    margin-bottom: 16px;
-    padding: 0px 20px;
-    overflow: hidden;
-    background-color: #081E3f;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    z-index: 10;
-    top: 0;
-}
-  
-li {
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    margin-top: 5px;
-}
-
-li:first-child {
-    font-size: x-large;
-    font-weight: bold;
-    margin-top: 0;
-    color: #e3ab1e;
-}
-
-li a {
-    text-align: center;
-    color: white;
-    text-decoration: none;
-}
-
-li a:hover {
-    color: rgb(189, 189, 189);
 }
