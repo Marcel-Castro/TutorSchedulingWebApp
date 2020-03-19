@@ -48,6 +48,8 @@ function populateTutorList (tutors) {
                     tutorsSpan.classList.add("listSpan");
                     shiftsList.appendChild(tutorsSpan);
                 }
+
+                setCardFocus(newContainer, "tutor");
             })
 
             // Create and add edit button to card

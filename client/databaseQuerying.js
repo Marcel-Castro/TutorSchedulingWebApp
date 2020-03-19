@@ -84,7 +84,20 @@ function populateCoursesArray (populateCourseSelector) {
 
 
 function addCourse (code) {
+    var xhttp = new XMLHttpRequest();
 
+    var data = {
+        courseCode: code
+    }
+
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("addCourse(): Data sent successfully");
+        }
+    }
+    xhttp.open("POST", "http://localhost:4000/courses/add");
+    xhttp.send(JSON.stringify(data));
 }
 
 
