@@ -1,3 +1,6 @@
+// Alert message displayed when "Add Course" button is pressed while "Course Code" text box is empty
+const EMPTY_SUBMIT_WARNING = "A Course Code is Required";
+
 // Get array containing the tutors that cover specified course
 function getTutorsByCourse (tutors, course) {
     var tutorsForCourse = [];
@@ -74,7 +77,7 @@ function populateCourseList (courses) {
 function addFunctionalSubmit (text, submit) {
     submit.addEventListener("click", (event) => {
         if (text.value === "") {
-            alert("A Course Code is Required");
+            alert(EMPTY_SUBMIT_WARNING);
         } else {
             addCourse(text.value);
             location.reload();

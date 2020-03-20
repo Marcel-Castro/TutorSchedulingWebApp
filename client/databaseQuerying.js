@@ -42,23 +42,71 @@ function getOneTutor(ID) {
 }
 
 
-function addTutor (name, shifts, courses) {
+function addTutor (tutor) {
+    var data = tutor;
 
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", "http://localhost:4000/tutors/add");
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("addCourse(): Data sent successfully");
+        }
+    }
+    xhttp.send(JSON.stringify(data));
 }
 
 
 function updateTutor (ID) {
+    var data;
 
+    // Get tutor data from ID (the tutor will have been updated inside the tutor array prior to calling this function)
+    for (var i = 0; i < tutors.length; i++) {
+        if (tutors[i]._id === ID) {
+            data = tutors[i];
+        } 
+    }
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("POST", "http://localhost:4000/tutors/update/" + ID, true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("updateTutor(): Data sent successfully");
+        }
+    }
+    xhttp.send(JSON.stringify(data));
 }
 
 
 function deleteTutor (ID) {
+    var xhttp = new XMLHttpRequest();
 
+    xhttp.open("DELETE", "http://localhost:4000/tutors/deleteOne/" + ID, true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("deleteTutor(): Data deleted successfully");
+        }
+    }
+    xhttp.send();
 }
 
 
+// DANGEROUS: completely removes all tutors entries
 function deleteAllTutors () {
+    var xhttp = new XMLHttpRequest();
 
+    xhttp.open("DELETE", "http://localhost:4000/tutors/deleteAll", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("deleteAllTutors(): Data deleted successfully");
+        }
+    }
+    xhttp.send();
 }
 
 

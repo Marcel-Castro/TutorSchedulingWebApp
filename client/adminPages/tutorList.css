@@ -111,7 +111,7 @@ button:focus {
 }
 
 .listSpan:hover {
-    background-color: rgb(3, 16, 34);
+    background-color: rgb(2, 10, 22);
 }
 
 .tutorCard {
@@ -129,7 +129,7 @@ button:focus {
 }
 
 .tutorCard:hover {
-    background-color: rgb(3, 16, 34);
+    background-color: rgb(2, 10, 22);
 }
 
 /* TODO */
