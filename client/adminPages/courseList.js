@@ -53,6 +53,14 @@ function populateCourseList (courses) {
             var deleteText = document.createTextNode("Delete");
             deleteButton.appendChild(deleteText);
 
+            // Add delete button functionality
+            deleteButton.addEventListener("click", (event) => {
+                if (confirm("Delete " + currentCourse + "?")) {
+                    deleteCourse(currentCourse);
+                    location.reload();
+                }
+            })
+
             // Add button to card
             coursesSpan.appendChild(deleteButton);
 

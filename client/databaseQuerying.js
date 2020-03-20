@@ -1,5 +1,6 @@
 var tutors = [];
 var courses = [];
+var coursesDB = [];
 
 // Tutor queries ----------------------------
 function populateTutorsArray (populate) {
@@ -70,6 +71,7 @@ function populateCoursesArray (populateCourseSelector) {
             console.log("getCourses(): Data fetched successfully");
 
             var resData = JSON.parse(xhttp.responseText);
+            coursesDB = resData;
 
             for (var i = 0; i < resData.length; i++) {
                 courses.push(resData[i].courseCode);
@@ -84,12 +86,12 @@ function populateCoursesArray (populateCourseSelector) {
 
 
 function addCourse (code) {
-    var xhttp = new XMLHttpRequest();
-
     var data = {
         courseCode: code
     }
-    
+
+    var xhttp = new XMLHttpRequest();
+
     xhttp.open("POST", "http://localhost:4000/courses/add");
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function() {
@@ -101,6 +103,29 @@ function addCourse (code) {
 }
 
 
-function deleteCourse (ID) {
+function deleteCourse (courseCode) {
+    var ID;
 
+    // Get ID from course code
+    if (courses.length === coursesDB.length) {
+        for (var i = 0; i < coursesDB.length; i++) {
+            if (coursesDB[i].courseCode === courseCode) {
+                ID = coursesDB[i]._id;
+            }
+        }
+    } else {
+        console.log("Error: courses array does not mactch coursesDB array");
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("DELETE", "http://localhost:4000/courses/" + ID, true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("deleteCourse(): Data deleted successfully");
+        }
+    }
+    xhttp.send();
 }
