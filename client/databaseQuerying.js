@@ -89,14 +89,14 @@ function addCourse (code) {
     var data = {
         courseCode: code
     }
-
+    
+    xhttp.open("POST", "http://localhost:4000/courses/add");
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log("addCourse(): Data sent successfully");
         }
     }
-    xhttp.open("POST", "http://localhost:4000/courses/add");
     xhttp.send(JSON.stringify(data));
 }
 

@@ -64,14 +64,30 @@ function populateCourseList (courses) {
 
 
 function addFunctionalSubmit (text, submit) {
-
+    submit.addEventListener("click", (event) => {
+        if (text.value === "") {
+            alert("A Course Code is Required");
+        } else {
+            addCourse(text.value);
+            location.reload();
+        }
+    })
 }
 
 
 function main () {
-    var inputText = document.getElementById("inputForm");
+    var inputText = document.getElementById("courseCode");
     var inputSubmit = document.getElementById("submit");
+    var form = document.getElementById("form");
+
+    // Disable default behaviour for form (such as reloading page on submit)
+    function handleForm (event) { 
+        event.preventDefault(); 
+    } 
+    form.addEventListener('submit', handleForm);
 
     populateTutorsArray(function () {});
     populateCoursesArray(populateCourseList);
+
+    addFunctionalSubmit(inputText, inputSubmit);
 }
