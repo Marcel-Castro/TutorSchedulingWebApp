@@ -1,6 +1,21 @@
 // Alert message displayed when "Add Course" button is pressed while "Course Code" text box is empty
 const EMPTY_SUBMIT_WARNING = "A Course Code is Required";
 
+
+// Deletes a course from all the course list of every tutor
+function deleteCourseFromTutors (course) {
+    for (var i = 0; i < tutors.length; i++) {
+        for (var j = 0; j < tutors[i].courses.length; j++) {
+            if (tutors[i].courses[j] === course) {
+                tutors[i].courses.splice(j, 1);
+                updateTutor(tutors[i]._id);
+                continue;
+            }
+        }
+    }
+}
+
+
 // Get array containing the tutors that cover specified course
 function getTutorsByCourse (tutors, course) {
     var tutorsForCourse = [];
@@ -59,6 +74,7 @@ function populateCourseList (courses) {
             // Add delete button functionality
             deleteButton.addEventListener("click", (event) => {
                 if (confirm("Delete " + currentCourse + "?")) {
+                    deleteCourseFromTutors(currentCourse);
                     deleteCourse(currentCourse);
                     location.reload();
                 }

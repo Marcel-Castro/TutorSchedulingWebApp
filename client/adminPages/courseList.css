@@ -51,6 +51,11 @@
     transition: color .5s, background-color .5s;
 }
 
+.courseCardButton:hover {
+    background-color: rgb(207, 207, 207);
+    color: rgb(66, 142, 255);
+}
+
 .header form .tutorCardButton {
     padding: 9px 14px;
 }
