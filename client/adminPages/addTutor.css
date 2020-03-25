@@ -1,0 +1,90 @@
+.gridContainer {
+    height: 74%;
+    width: 94%;
+    margin: auto;
+    display: grid;
+    grid-column-gap: 5px;
+    /* Equal row widths */
+    grid-auto-columns: 1fr;
+    /* Equal column heights */
+    grid-auto-rows: 1fr;
+}
+
+.gridItem1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: auto;
+    grid-row-end: auto;
+    padding: 16px;
+}
+
+.gridItem2 {
+    grid-column-start: 2;
+}
+
+form {
+    margin-left: 65px;
+}
+
+@media only screen and (max-width: 940px) {
+    .gridItem2 {
+        grid-column-start: auto;
+        margin-bottom: 16px;
+    }
+
+    form {
+        margin-left: 40px;
+    }
+}
+
+.nameSpan {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.headerButtons {
+    margin-top: 8px;
+}
+
+select {
+    padding: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    background-image: linear-gradient(to bottom, #ffffff 0%,#d4d4d4 100%);
+}
+
+select:focus {
+    outline: none;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    background-color: #081E3f;
+    border-radius: 10px;
+    padding: 14px 28px;
+    margin-top: 8px;
+}
+
+.card:last-child {
+    margin-bottom: 8px;
+}
+
+.cardText {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+form .tutorCardButton {
+    border-style: solid;
+    border-color: #081E3f;
+    border-width: 3px;
+}
+
+form .tutorCardButton:first-child {
+    margin-left: 0;
+}

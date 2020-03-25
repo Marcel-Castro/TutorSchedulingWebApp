@@ -3,7 +3,7 @@
     grid-column-end: 2;
     grid-row-start: auto;
     grid-row-end: auto;
-    padding: 16px
+    padding: 16px;
 }
 
 .gridItem2 {
@@ -62,6 +62,7 @@
 
 input[type=text] {
     font-size: 18px;
+    font-weight: bold;
     width: auto;
     padding: 8px 8px;
     border: 1px solid #ccc;

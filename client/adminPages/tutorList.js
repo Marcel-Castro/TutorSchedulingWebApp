@@ -18,6 +18,8 @@ function populateTutorList (tutors) {
             // tutors is not available to the event listeners after this function runs
             var thisCourses = tutors[i].courses;
             var thisShifts = tutors[i].shifts;
+            var tutorName = tutors[i].name;
+            var tutorID = tutors[i]._id;
 
             // Add card onClick event listener
             newContainer.addEventListener("click", (event) => {
@@ -58,11 +60,24 @@ function populateTutorList (tutors) {
             var editText = document.createTextNode("Edit");
             editButton.appendChild(editText);
 
+            // Add delete button functionality
+            editButton.addEventListener("click", (event) => {
+                window.location.href = "addTutor.html" + "?" + tutorID;
+            })
+
             // Create and add delete button to card
             var deleteButton = document.createElement("button");
             deleteButton.classList.add("tutorCardButton");
             var deleteText = document.createTextNode("Delete");
             deleteButton.appendChild(deleteText);
+
+            // Add delete button functionality
+            deleteButton.addEventListener("click", (event) => {
+                if (confirm("Delete " + tutorName + "?")) {
+                    deleteTutor(tutorID);
+                    location.reload();
+                }
+            })
 
             // Add buttons to card
             var buttonWrapper = document.createElement("div");

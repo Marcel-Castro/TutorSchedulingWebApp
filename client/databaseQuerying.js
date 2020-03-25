@@ -22,17 +22,19 @@ function populateTutorsArray (populate) {
 }
 
 
-function getOneTutor(ID) {
+function getOneTutor(ID, callback) {
     var xhttp = new XMLHttpRequest();
     var tutorData;
 
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("getTutors(): Data fetched successfully");
+            console.log("getOneTutor(): Data fetched successfully");
 
             var resData = JSON.parse(xhttp.responseText);
 
             tutorData = resData;
+
+            callback(tutorData);
         }
     }
     xhttp.open("GET", "http://localhost:4000/tutors/getTutor/" + ID, true);
@@ -111,7 +113,7 @@ function deleteAllTutors () {
 
 
 // Course queries ----------------------------
-function populateCoursesArray (populateCourseSelector) {
+function populateCoursesArray (callback) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -125,11 +127,42 @@ function populateCoursesArray (populateCourseSelector) {
                 courses.push(resData[i].courseCode);
             }
 
-            populateCourseSelector(courses);
+            callback(courses);
         }
     }
     xhttp.open("GET", "http://localhost:4000/courses/");
     xhttp.send();
+}
+
+
+function getCoursesPromise() {
+    var xhttp = new XMLHttpRequest();
+    var thisCourses = [];
+
+    return new Promise((resolve, reject) => {
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    console.log("getCourses(): Data fetched successfully");
+
+                    var resData = JSON.parse(xhttp.responseText);
+
+                    for (var i = 0; i < resData.length; i++) {
+                        thisCourses.push(resData[i].courseCode);
+                    }
+
+                    resolve(thisCourses);
+                } else {
+                    reject({
+                        status: xhttp.status,
+                        statusText: xhttp.statusText
+                    });
+                }
+            }
+        }
+        xhttp.open("GET", "http://localhost:4000/courses/");
+        xhttp.send();
+    })
 }
 
 
