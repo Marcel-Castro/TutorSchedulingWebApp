@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="addTutor.css">
 
     <script src="../databaseQuerying.js"></script>
+    <script src="../table.js"></script>
+    <script src="generalList.js"></script>
     <script src="addTutor.js"></script>
 
     <title>STARS Scheduling Add Tutor</title>
@@ -24,35 +26,31 @@
         <li><a href="courseList.html">Courses</a></li>
         <li style="float:right"><a href="login.html">Logout</a></li>
     </ul>
-    <div>
-        <form id="form">
-            <span class="nameSpan">Tutor Name:</span>
-            <input type="text" id="tutorName" placeholder="Tutor Name" value="">
-        </form>
+    <div class="tutorFields">
+        <span class="nameSpan">Tutor Name:</span>
+        <input type="text" id="tutorName" placeholder="Tutor Name" value="">
     </div>
     <div class="gridContainer">
         <div class="item gridItem1">
             <div class="header">Courses Covered by this Tutor:</div>
             <div id="coursesCovered" class="listContainer"></div>
             <div class="header">
-                <button id="addTutor" class="tutorCardButton">Add New</button>
-                <button id="addTutor" class="tutorCardButton">Clear All</button>
+                <button id="addCourse" class="tutorCardButton">Add New</button>
+                <button id="clearCourse" class="tutorCardButton">Clear All</button>
             </div>
         </div>
         <div class="item gridItem2">
             <div class="header">Shifts covered by this Tutor:</div>
             <div id="shiftsCovered" class="listContainer"></div>
             <div class="header">
-                <button id="addTutor" class="tutorCardButton">Add New</button>
-                <button id="addTutor" class="tutorCardButton">Clear All</button>
+                <button id="addShift" class="tutorCardButton">Add New</button>
+                <button id="clearShift" class="tutorCardButton">Clear All</button>
             </div>
         </div>
     </div>
-    <div class="test">
-        <form id="form">
-            <button id="update" class="tutorCardButton">Update Tutor</button>
-            <button id="new" class="tutorCardButton">Add As New Tutor</button>
-        </form>
+    <div class="tutorFields">
+        <button id="update" class="tutorSubmitButtons">Update Tutor</button>
+        <button id="new" class="tutorSubmitButtons">Add As New Tutor</button>
     </div>
     <script>
         main();

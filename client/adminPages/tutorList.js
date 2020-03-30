@@ -60,7 +60,7 @@ function populateTutorList (tutors) {
             var editText = document.createTextNode("Edit");
             editButton.appendChild(editText);
 
-            // Add delete button functionality
+            // Add edit button functionality
             editButton.addEventListener("click", (event) => {
                 window.location.href = "addTutor.html" + "?" + tutorID;
             })

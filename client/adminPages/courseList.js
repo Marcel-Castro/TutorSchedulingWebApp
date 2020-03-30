@@ -8,7 +8,7 @@ function deleteCourseFromTutors (course) {
         for (var j = 0; j < tutors[i].courses.length; j++) {
             if (tutors[i].courses[j] === course) {
                 tutors[i].courses.splice(j, 1);
-                updateTutor(tutors[i]._id);
+                updateTutor(tutors[i]._id, tutors[i]);
                 continue;
             }
         }

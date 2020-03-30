@@ -56,3 +56,7 @@ li a {
 li a:hover {
     color: rgb(189, 189, 189);
 }
+
+.hide {
+    display: none;
+}

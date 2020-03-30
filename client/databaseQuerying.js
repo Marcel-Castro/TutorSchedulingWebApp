@@ -60,16 +60,7 @@ function addTutor (tutor) {
 }
 
 
-function updateTutor (ID) {
-    var data;
-
-    // Get tutor data from ID (the tutor will have been updated inside the tutor array prior to calling this function)
-    for (var i = 0; i < tutors.length; i++) {
-        if (tutors[i]._id === ID) {
-            data = tutors[i];
-        } 
-    }
-
+function updateTutor (ID, tutor) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.open("POST", "http://localhost:4000/tutors/update/" + ID, true);
@@ -79,7 +70,7 @@ function updateTutor (ID) {
             console.log("updateTutor(): Data sent successfully");
         }
     }
-    xhttp.send(JSON.stringify(data));
+    xhttp.send(JSON.stringify(tutor));
 }
 
 
