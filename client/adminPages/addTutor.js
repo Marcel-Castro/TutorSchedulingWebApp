@@ -44,6 +44,34 @@
 // }
 
 
+// Creates button elements with clone and delete icons
+function createCloneAndDeleteButton() {
+    // Create duplicate and delete buttons
+    var deleteButton = document.createElement("button");
+    var cloneButton = document.createElement("button");
+
+    // Create elements to contain icons
+    var deleteIcon = document.createElement("i");
+    var cloneIcon = document.createElement("i");
+
+    // Add classes corresponding to desired icons
+    deleteIcon.classList.add("fas", "fa-trash-alt");
+    cloneIcon.classList.add("fas", "fa-clone");
+
+    // Add icons to buttons
+    deleteButton.appendChild(deleteIcon);
+    cloneButton.appendChild(cloneIcon);
+
+    deleteButton.classList.add("cardIconButton");
+    cloneButton.classList.add("cardIconButton");
+
+    return {
+        deleteButton: deleteButton,
+        cloneButton: cloneButton
+    }
+}
+
+
 // Creates a card for the course list with the appropriate fields
 function createCourseCard(course) {
     var courseList = document.getElementById("coursesCovered");
@@ -85,7 +113,20 @@ function createCourseCard(course) {
         courseSelector.appendChild(option);
     }
 
+    // Create clone and delete buttons
+    var buttons = createCloneAndDeleteButton();
+    var deleteButton = buttons.deleteButton;
+
+    deleteButton.addEventListener("click", (event) => {
+        newCard.parentNode.removeChild(newCard);
+    })
+
+    var buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("cardButtonContainer");
+    buttonContainer.appendChild(deleteButton);
+
     newCard.appendChild(courseSelector);
+    newCard.appendChild(buttonContainer);
     courseList.appendChild(newCard);
 }
 
@@ -106,7 +147,7 @@ function generateTimeOptions(time) {
     var option = document.createElement("option");
     var optionText = document.createTextNode("");
     option.appendChild(optionText);
-    option.value = "";
+    option.value = 0;
 
     if (time === 0) {
         option.selected = "selected";
@@ -193,30 +234,19 @@ function createShiftCard(shift) {
         spanTo.appendChild(toText);
         spanTo.classList.add("shiftCardText");
 
-        // Create duplicate and delete buttons
-        var deleteButton = document.createElement("button");
-        var cloneButton = document.createElement("button");
-
-        // For testing --------------------------------------------------------------
-        deleteButton.appendChild(document.createTextNode("DELETE"));
-        cloneButton.appendChild(document.createTextNode("CLONE"));
-
-        deleteButton.classList.add("cardIconButton");
-        cloneButton.classList.add("cardIconButton");
-
-        // element.parentNode.removeChild(element);
+        var buttons = createCloneAndDeleteButton();
+        var deleteButton = buttons.deleteButton;
+        var cloneButton = buttons.cloneButton;
 
         deleteButton.addEventListener("click", (event) => {
             newCard.parentNode.removeChild(newCard);
         })
 
-        // TODO ----------------------------------------------------------------------
         cloneButton.addEventListener("click", (event) => {
-            console.log(newCard.childNodes[2]);
             newCard.parentNode.appendChild(createShiftCard({
                 day: newCard.childNodes[0].value,
-                startTime: newCard.childNodes[2].value,
-                endTime: newCard.childNodes[4].value
+                startTime: parseFloat(newCard.childNodes[2].value),
+                endTime: parseFloat(newCard.childNodes[4].value)
             }))
         })
 
@@ -224,8 +254,8 @@ function createShiftCard(shift) {
         var buttonContainer = document.createElement("div");
         buttonContainer.classList.add("cardButtonContainer");
 
-        buttonContainer.appendChild(deleteButton);
         buttonContainer.appendChild(cloneButton);
+        buttonContainer.appendChild(deleteButton);
 
         newCard.appendChild(daySelector);
         newCard.appendChild(spanFrom);
@@ -330,8 +360,8 @@ function createNewTutor() {
         var newShift = {
             // Indexes 0, 2, 4 correspond to the day and time selectors
             day: shiftList[i].childNodes[0].value,
-            startTime: shiftList[i].childNodes[2].value,
-            endTime: shiftList[i].childNodes[4].value
+            startTime: parseFloat(shiftList[i].childNodes[2].value),
+            endTime: parseFloat(shiftList[i].childNodes[4].value)
         }
 
         newTutor.shifts.push(newShift);

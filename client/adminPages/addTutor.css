@@ -30,21 +30,6 @@
     margin-bottom: 20px;
 }
 
-@media only screen and (max-width: 940px) {
-    .gridItem2 {
-        grid-column-start: auto;
-        margin-bottom: 16px;
-    }
-
-    .gridContainer {
-        height: 160%;
-    }
-
-    .tutorFields {
-        margin-left: 30px;
-    }
-}
-
 .nameSpan {
     font-size: 18px;
     font-weight: bold;
@@ -101,11 +86,22 @@ option {
 }
 
 .cardButtonContainer {
-
+    display: flex;
+    justify-content: center;
+    margin-left: 7px;
 }
 
 .cardIconButton {
-    
+    font-size: 20px;
+    color: #ffffff;
+    border-style: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color .5s;
+}
+
+.cardIconButton:hover {
+    color: rgb(255, 231, 15);
 }
 
 .tutorSubmitButtons {
@@ -133,4 +129,27 @@ option {
 .tutorSubmitButtons:hover {
     background-color: rgb(207, 207, 207);
     color: rgb(66, 142, 255);
+}
+
+@media only screen and (max-width: 940px) {
+    .gridItem2 {
+        grid-column-start: auto;
+        margin-bottom: 16px;
+    }
+
+    .gridContainer {
+        height: 160%;
+    }
+
+    .tutorFields {
+        margin-left: 30px;
+    }
+
+    select {
+        font-size: 14px;
+    }
+
+    .cardButtonContainer {
+        margin-left: 4px;
+    }
 }
