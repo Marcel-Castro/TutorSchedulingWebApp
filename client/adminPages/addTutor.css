@@ -26,7 +26,7 @@
     margin-left: 50px;
 }
 
-.tutorFields:last-child {
+.tutorFields:last-of-type {
     margin-bottom: 20px;
 }
 
