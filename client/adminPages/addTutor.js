@@ -1,3 +1,14 @@
+// Input validation related warnings for shift cards
+const NO_SHIFTS = "No shifts were added to this tutor!";
+const EMPTY_SHIFT_FIELDS = "There are empty fields in one or more shifts!";
+const INVALID_TIMES = "Starting time is greater than or equal to ending time in one or more shifts!";
+const OVERLAP_SHIFTS = "There are shifts with overlapping times on the same day!";
+
+// Input validation related warnings for course cards
+const NO_COURSES = "No courses were added to this tutor!";
+const EMPTY_COURSE_FIELD = "There are empty fields in one or more courses!";
+const DUPLICATE_COURSES = "There are duplicate courses!";
+
 // Shift compare function to use with javascript sort()
 /*
     returns positive int for shiftA > shiftB
@@ -321,6 +332,90 @@ function shiftClearButton() {
 }
 
 
+function validateShiftInput(shifts) {
+    var shiftLength = shifts.length;
+
+    // Check if there are shifts added at all
+    if (shiftLength <= 0) {
+        alert(NO_SHIFTS);
+        return "Invalid";
+    }
+
+    // Check for blank values or simple invalid times
+    for (var i = 0; i < shiftLength; i++) {
+        if (shifts[i].day === "" || shifts[i].startTime === 0 || shifts[i].endTime === 0) {
+            // Alert: Missing fields
+            alert(EMPTY_SHIFT_FIELDS);
+            return "Invalid";
+        }
+
+        if (shifts[i].endTime <= shifts[i].startTime) {
+            // Alert: A shift has invalid times (It ends earlier than it starts or at the same time)
+            alert(INVALID_TIMES);
+            return "Invalid";
+        }
+    }
+
+    // Check for overlapping shifts
+    for (var i = 0; i < shiftLength; i++) {
+        for (var j = 0; j < shiftLength; j++) {
+            if (i === j) {
+                continue;
+            }
+
+            if (shifts[i].day === shifts[j].day) {
+                /*
+                    Overlap if:
+                    - Same start time
+                    - i.startTime < j.startTime && i.endTime > j.startTime
+                    - i.startTime > j.startTime && j.endTime > i.startTime
+                */
+                if (shifts[i].startTime === shifts[j].startTime || 
+                    (shifts[i].startTime < shifts[j].startTime && shifts[i].endTime > shifts[j].startTime) ||
+                    (shifts[i].startTime < shifts[j].startTime && shifts[i].endTime > shifts[j].startTime)) {
+                        // Alert: There are shifts with overlapping times on the same day
+                        alert(OVERLAP_SHIFTS);
+                        return "Invalid";
+                }
+            }
+        }
+    }
+}
+
+
+function validateCourseInput(courseList) {
+    var courseLength = courseList.length;
+
+    // Check if there are courses added at all
+    if (courseLength <= 0) {
+        alert(NO_COURSES);
+        return "Invalid";
+    }
+
+    // Check for empty fields
+    for (var i = 0; i < courseLength; i++) {
+        if (courseList[i] === "") {
+            alert(EMPTY_COURSE_FIELD);
+            return "Invalid";
+        }
+    }
+
+    // Check for duplicates
+    for (var i = 0; i < courseLength; i++) {
+        for (var j = 0; j < courseLength; j++) {
+            if (i === j) {
+                continue;
+            }
+
+            if (courseList[i] === courseList[j]) {
+                alert(DUPLICATE_COURSES);
+                return "Invalid";
+            }
+        }
+    }
+}
+
+
 // Creates a tutor object from the contents of the addTutor page
 function createNewTutor() {
     var shiftList = document.getElementById("shiftsCovered").childNodes;
@@ -344,6 +439,11 @@ function createNewTutor() {
         newTutor.shifts.push(newShift);
     }
 
+    // Validate user input for shifts
+    if (validateShiftInput(newTutor.shifts) === "Invalid") {
+        return "Invalid";
+    }
+
     // Sort shift list of this tutor
     newTutor.shifts.sort(compareShifts);
 
@@ -352,6 +452,11 @@ function createNewTutor() {
         var newCourse = courseList[i].childNodes[1].value;
 
         newTutor.courses.push(newCourse);
+    }
+
+    // Validate user input for courses
+    if (validateCourseInput(newTutor.courses) === "Invalid") {
+        return "Invalid";
     }
 
     // Sort course list of this tutor
@@ -367,10 +472,12 @@ function newTutorButton() {
     newTutorButton.addEventListener("click", (event) => {
         var newTutor = createNewTutor();
 
-        // Post tutor to database
-        addTutor(newTutor);
+        if (newTutor !== "Invalid") {
+            // Post tutor to database
+            addTutor(newTutor);
 
-        window.location.href = "tutorList.html"
+            window.location.href = "tutorList.html";
+        }
     })
 }
 
@@ -381,10 +488,12 @@ function updateTutorButton(tutorID) {
     updateTutorButton.addEventListener("click", (event) => {
         var newTutor = createNewTutor();
 
-        // Post tutor to database
-        updateTutor(tutorID, newTutor);
+        if (newTutor !== "Invalid") {
+            // Post tutor to database
+            updateTutor(tutorID, newTutor);
 
-        window.location.href = "tutorList.html"
+            window.location.href = "tutorList.html";
+        }
     })
 }
 
@@ -436,6 +545,8 @@ function main() {
     courseClearButton();
     shiftClearButton();
     newTutorButton();
+    
+    // Promise initializes tutors array with all tutors from database TODO ---------------------------------------
 
     if (queryString !== "") {
         // Add button functionality
