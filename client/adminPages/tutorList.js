@@ -62,7 +62,7 @@ function populateTutorList (tutors) {
 
             // Add edit button functionality
             editButton.addEventListener("click", (event) => {
-                window.location.href = "addTutor.html" + "?" + tutorID;
+                window.location.href = "./addTutor_Page/addTutor.html" + "?" + tutorID;
             })
 
             // Create and add delete button to card

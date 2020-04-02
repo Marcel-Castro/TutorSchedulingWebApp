@@ -107,19 +107,18 @@ option {
 .tutorSubmitButtons {
     color: #081E3f;
     font-weight: bold;
-    padding: 9px;
+    padding: 12px;
     font-size: 18px;
     margin-left: 16px;
     position: relative;
     z-index: 1;
     border-radius: 8px;
-    border-style: none;
-    background-color: white;
-    transition: color .5s, background-color .5s;
-    cursor: pointer;
     border-style: solid;
+    border-width: 4px;
     border-color: #081E3f;
-    border-width: 3px;
+    background-color: rgb(255, 255, 255);
+    transition: color .5s, background-color .5s, border-color .5s;
+    cursor: pointer;
 }
 
 .tutorSubmitButtons:first-child {
@@ -128,7 +127,12 @@ option {
 
 .tutorSubmitButtons:hover {
     background-color: rgb(207, 207, 207);
+    border-color: rgb(66, 142, 255);
     color: rgb(66, 142, 255);
+}
+
+.removeMargin {
+    margin: 0;
 }
 
 @media only screen and (max-width: 940px) {

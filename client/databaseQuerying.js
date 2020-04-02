@@ -3,7 +3,7 @@ var courses = [];
 var coursesDB = [];
 
 // Tutor queries ----------------------------
-function populateTutorsArray (populate) {
+function populateTutorsArray (callback) {
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
@@ -12,13 +12,40 @@ function populateTutorsArray (populate) {
 
             var resData = JSON.parse(xhttp.responseText);
 
+            // Sets global tutors array equal to the list of tutors returned from the database
             tutors = resData;
 
-            populate(tutors);
+            callback(tutors);
         }
     }
     xhttp.open("GET", "http://localhost:4000/tutors/", true);
     xhttp.send();
+}
+
+
+function getTutorsPromise() {
+    var xhttp = new XMLHttpRequest();
+
+    return new Promise((resolve, reject) => {
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    console.log("getTutors(): Data fetched successfully");
+
+                    var resData = JSON.parse(xhttp.responseText);
+
+                    resolve(resData);
+                } else {
+                    reject({
+                        status: xhttp.status,
+                        statusText: xhttp.statusText
+                    });
+                }
+            }
+        }
+        xhttp.open("GET", "http://localhost:4000/tutors/", true);
+        xhttp.send();
+    })
 }
 
 
