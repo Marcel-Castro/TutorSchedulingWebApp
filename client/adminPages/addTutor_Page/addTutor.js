@@ -322,12 +322,12 @@ function shiftClearButton() {
 
 
 // Creates a tutor object from the contents of the addTutor page
-function createNewTutor() {
+function createNewTutor(checkUpdate) {
     var shiftList = document.getElementById("shiftsCovered").childNodes;
     var courseList = document.getElementById("coursesCovered").childNodes;
     var tutorName = document.getElementById("tutorName").value;
 
-    if (validateNameInput(tutorName) === "Invalid") {
+    if (validateNameInput(tutorName, tutors, checkUpdate) === "Invalid") {
         return "Invalid";
     }
 
@@ -380,7 +380,7 @@ function newTutorButton() {
     var newTutorButton = document.getElementById("new");
 
     newTutorButton.addEventListener("click", (event) => {
-        var newTutor = createNewTutor();
+        var newTutor = createNewTutor(false);
 
         if (newTutor !== "Invalid") {
             // Post tutor to database
@@ -396,7 +396,7 @@ function updateTutorButton(tutorID) {
     var updateTutorButton = document.getElementById("update");
 
     updateTutorButton.addEventListener("click", (event) => {
-        var newTutor = createNewTutor();
+        var newTutor = createNewTutor(true);
 
         if (newTutor !== "Invalid") {
             // Post tutor to database
@@ -450,21 +450,31 @@ function main() {
             newCourseButton();
         })
         .catch (error => {
-            console.log(error)
+            console.log(error);
         })
 
     // Add button functionalities
     newShiftButton();
     courseClearButton();
     shiftClearButton();
-    newTutorButton();
     
-    // Promise initializes tutors array with all tutors from database TODO ---------------------------------------
+    // Promise initializes tutors array with all tutors from database
+    getTutorsPromise()
+        .then (tutorsArray => {
+            tutors = tutorsArray;
 
-    if (queryString !== "") {
-        // Add button functionality
-        updateTutorButton(queryString);
-    } else {
+            newTutorButton();
+
+            if (queryString !== "") {
+                // Add button functionality
+                updateTutorButton(queryString);
+            }
+        })
+        .catch (error => {
+            console.log(error);
+        })
+
+    if (queryString === "") {
         setPageForAdding();
     }
 }

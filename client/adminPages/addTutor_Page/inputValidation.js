@@ -10,7 +10,8 @@ const EMPTY_COURSE_FIELD = "There are empty fields in one or more courses!";
 const DUPLICATE_COURSES = "There are duplicate courses!";
 
 // Input validation related warnings for name field
-const NO_NAME = "A name was not provided for this tutor!"
+const NO_NAME = "A name was not provided for this tutor!";
+const DUPLICATE_TUTOR_NAME = "There already exist a tutor with this name. Would you like to create a new tutor with this name anyway?";
 
 function validateShiftInput(shifts) {
     var shiftLength = shifts.length;
@@ -96,9 +97,21 @@ function validateCourseInput(courseList) {
 }
 
 
-function validateNameInput(name) {
+function validateNameInput(name, tutorList, checkUpdate) {
+    // Check if name fied is blank
     if (name === "") {
         alert(NO_NAME);
         return "Invalid";
+    }
+
+    if (checkUpdate === false) {
+        // Check for duplicate tutor names
+        for (var i = 0; i < tutorList.length; i++) {
+            if (tutorList[i].name === name) {
+                if (!confirm(DUPLICATE_TUTOR_NAME)) {
+                    return "Invalid";
+                }
+            }
+        }
     }
 }
