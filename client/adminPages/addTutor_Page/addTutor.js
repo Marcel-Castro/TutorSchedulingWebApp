@@ -386,7 +386,7 @@ function newTutorButton() {
             // Post tutor to database
             addTutor(newTutor);
 
-            window.location.href = "../tutorList.html";
+            window.location.href = "../tutorList_Page/tutorList.html";
         }
     })
 }
@@ -402,7 +402,7 @@ function updateTutorButton(tutorID) {
             // Post tutor to database
             updateTutor(tutorID, newTutor);
 
-            window.location.href = "../tutorList.html";
+            window.location.href = "../tutorList_Page/tutorList.html";
         }
     })
 }

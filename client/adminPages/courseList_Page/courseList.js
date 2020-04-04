@@ -9,7 +9,7 @@ function deleteCourseFromTutors (course) {
             if (tutors[i].courses[j] === course) {
                 tutors[i].courses.splice(j, 1);
                 updateTutor(tutors[i]._id, tutors[i]);
-                continue;
+                break;
             }
         }
     }
