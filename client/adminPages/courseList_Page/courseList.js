@@ -76,7 +76,7 @@ function populateCourseList (courses) {
                 if (confirm("Delete " + currentCourse + "?")) {
                     deleteCourseFromTutors(currentCourse);
                     deleteCourse(currentCourse);
-                    location.reload();
+                    coursesSpan.parentNode.removeChild(coursesSpan);
                 }
             })
 
@@ -113,8 +113,15 @@ function main () {
     } 
     form.addEventListener('submit', handleForm);
 
-    populateTutorsArray(function () {});
-    populateCoursesArray(populateCourseList);
+    getTutorsPromise()
+        .then (tutorsArray => {
+            tutors = tutorsArray;
+
+            populateCoursesArray(populateCourseList);
+        })
+        .catch (error => {
+            console.log(error);
+        })
 
     addFunctionalSubmit(inputText, inputSubmit);
 }

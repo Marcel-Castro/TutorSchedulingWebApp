@@ -75,7 +75,7 @@ function populateTutorList (tutors) {
             deleteButton.addEventListener("click", (event) => {
                 if (confirm("Delete " + tutorName + "?")) {
                     deleteTutor(tutorID);
-                    location.reload();
+                    newContainer.parentNode.removeChild(newContainer);
                 }
             })
 
