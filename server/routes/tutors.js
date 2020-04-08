@@ -3,7 +3,7 @@ let Tutor = require('../models/tutorModel')
 
 // Get all tutors
 router.route('/').get((req, res) => {
-    Tutor.find()
+    Tutor.find().sort({ name: 'asc'})
         .then(tutors => res.json(tutors))
         .catch(err => res.status(400).json('Error: ' + err))
 })

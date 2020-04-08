@@ -3,7 +3,7 @@ let Course = require('../models/courseModel')
 
 // Get all courses
 router.route('/').get((req, res) => {
-    Course.find()
+    Course.find().sort({ courseCode: 'asc'})
         .then(course => res.json(course))
         .catch(err => res.status(400).json('Error: ' + err))
 })

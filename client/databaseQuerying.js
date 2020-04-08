@@ -115,7 +115,7 @@ function deleteTutor (ID) {
 }
 
 
-// DANGEROUS: completely removes all tutors entries
+// DANGEROUS: completely removes all tutor entries
 function deleteAllTutors () {
     var xhttp = new XMLHttpRequest();
 
